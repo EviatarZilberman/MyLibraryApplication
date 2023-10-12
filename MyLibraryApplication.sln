@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibrary", "MyLibrary\MyLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIApp", "..\..\source\repos\APIAppDemo\APIApp\APIApp.csproj", "{9E4B081D-DB1F-4978-9243-F1CB7903CC30}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostgreSQLDBManager", "..\PostgreSQLDBManager\PostgreSQLDBManager.csproj", "{98144AA7-0294-493A-80C9-D51624056283}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "..\Utilities\Utilities.csproj", "{2ACB22C4-4BE2-40EE-BA4B-C3D71DFA8816}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9E4B081D-DB1F-4978-9243-F1CB7903CC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E4B081D-DB1F-4978-9243-F1CB7903CC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E4B081D-DB1F-4978-9243-F1CB7903CC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98144AA7-0294-493A-80C9-D51624056283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98144AA7-0294-493A-80C9-D51624056283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98144AA7-0294-493A-80C9-D51624056283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98144AA7-0294-493A-80C9-D51624056283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ACB22C4-4BE2-40EE-BA4B-C3D71DFA8816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ACB22C4-4BE2-40EE-BA4B-C3D71DFA8816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ACB22C4-4BE2-40EE-BA4B-C3D71DFA8816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ACB22C4-4BE2-40EE-BA4B-C3D71DFA8816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
