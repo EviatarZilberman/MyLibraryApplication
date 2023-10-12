@@ -16,8 +16,6 @@ namespace MyLibraryApp.Models
             throw new NotImplementedException();
         }
 
-        public static void Function() { }
-
         public override string? DeleteQuery(string id)
         {
             return $@"Delete from public.users * where id = '{this.Id}'";
