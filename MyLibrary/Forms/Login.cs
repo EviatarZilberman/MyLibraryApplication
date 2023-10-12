@@ -12,21 +12,21 @@ namespace MyLibrary.Forms
 {
     public partial class Login : Form
     {
-       /* public static Login? instance = null;
+        public string Username { get; set; } = string.Empty;
+        /* public static Login? instance = null;
 
-        public static Login? Instance()
-        {
-            if (instance == null)
-            {
-                instance = new Login();
-            }
+         public static Login? Instance()
+         {
+             if (instance == null)
+             {
+                 instance = new Login();
+             }
 
-            return instance;
-        }*/
+             return instance;
+         }*/
 
         public Login()
         {
-            this.Text = "Welcome!";
             InitializeComponent();
         }
 
@@ -35,9 +35,10 @@ namespace MyLibrary.Forms
             if (string.IsNullOrEmpty(usernameBox.Text) || string.IsNullOrWhiteSpace(usernameBox.Text))
             {
                 MessageBox.Show("Username or password are invalid!");
-            } else
+            }
+            else
             {
-                MessageBox.Show("Done!");
+                this.Username = usernameBox.Text;
                 this.Close();
             }
         }

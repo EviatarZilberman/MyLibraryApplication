@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            mainTitleLabel = new Label();
             SuspendLayout();
+            // 
+            // mainTitleLabel
+            // 
+            mainTitleLabel.AutoSize = true;
+            mainTitleLabel.Location = new Point(325, 64);
+            mainTitleLabel.Name = "mainTitleLabel";
+            mainTitleLabel.Size = new Size(0, 25);
+            mainTitleLabel.TabIndex = 0;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(mainTitleLabel);
             Name = "Main";
             Text = "Main";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label mainTitleLabel;
     }
 }

@@ -35,6 +35,7 @@
             passwordLabel = new Label();
             stayLoggedcheckBox = new CheckBox();
             registerLinkLabel = new LinkLabel();
+            label1 = new Label();
             SuspendLayout();
             // 
             // loginButton
@@ -99,11 +100,23 @@
             registerLinkLabel.TabStop = true;
             registerLinkLabel.Text = "Register!";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Tahoma", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(298, 40);
+            label1.Name = "label1";
+            label1.Size = new Size(176, 43);
+            label1.TabIndex = 7;
+            label1.Text = "Welcome!";
+            label1.TextAlign = ContentAlignment.TopCenter;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(registerLinkLabel);
             Controls.Add(stayLoggedcheckBox);
             Controls.Add(passwordBox);
@@ -126,5 +139,6 @@
         private Label passwordLabel;
         private CheckBox stayLoggedcheckBox;
         private LinkLabel registerLinkLabel;
+        private Label label1;
     }
 }
