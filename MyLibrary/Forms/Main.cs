@@ -12,14 +12,13 @@ namespace MyLibrary.Forms
 {
     public partial class Main : Form
     {
-        public static int MainTitleLength { get; set; } = "Welcome,".Length;
         public Label MainTitleLabel { get; set; } = new Label();
         public Main()
         {
             InitializeComponent();
             Login login = new Login(); // Creates a new instance of login screen.
             login.ShowDialog(); // Shows the login instance above all screens.
-            
+
             if (login.DialogResult == DialogResult.OK && login.Username != null)
             {
                 //this.Username = login.Username;
@@ -31,6 +30,12 @@ namespace MyLibrary.Forms
                 this.Show();
             }
 
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("Are you sure you want to delete ");
         }
     }
 }

@@ -99,6 +99,7 @@
             registerLinkLabel.TabIndex = 6;
             registerLinkLabel.TabStop = true;
             registerLinkLabel.Text = "Register!";
+            registerLinkLabel.LinkClicked += registerLinkLabel_LinkClicked;
             // 
             // label1
             // 
@@ -126,6 +127,7 @@
             Controls.Add(loginButton);
             Name = "Login";
             Text = "MyLibrary- Login";
+            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

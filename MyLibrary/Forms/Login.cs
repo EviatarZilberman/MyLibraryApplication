@@ -16,17 +16,6 @@ namespace MyLibrary.Forms
     {
         public static User? LoggedUser { get; set; } = null;
         public string Username { get; set; } = string.Empty;
-        /* public static Login? instance = null;
-
-         public static Login? Instance()
-         {
-             if (instance == null)
-             {
-                 instance = new Login();
-             }
-
-             return instance;
-         }*/
 
         public Login()
         {
@@ -45,6 +34,17 @@ namespace MyLibrary.Forms
             {
                 MessageBox.Show("Username or password are invalid!");
             }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register register = new Register();
+            register.ShowDialog();
         }
     }
 }
