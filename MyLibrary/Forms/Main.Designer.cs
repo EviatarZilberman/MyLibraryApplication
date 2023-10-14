@@ -29,21 +29,34 @@
         private void InitializeComponent()
         {
             mainTitleLabel = new Label();
+            userBooksList = new ListBox();
             SuspendLayout();
             // 
             // mainTitleLabel
             // 
             mainTitleLabel.AutoSize = true;
-            mainTitleLabel.Location = new Point(325, 64);
+            mainTitleLabel.Location = new Point(22, 18);
             mainTitleLabel.Name = "mainTitleLabel";
-            mainTitleLabel.Size = new Size(0, 25);
+            mainTitleLabel.Size = new Size(85, 25);
             mainTitleLabel.TabIndex = 0;
+            mainTitleLabel.Text = "Welcome";
+            // 
+            // userBooksList
+            // 
+            userBooksList.AccessibleName = "userBooks";
+            userBooksList.FormattingEnabled = true;
+            userBooksList.ItemHeight = 25;
+            userBooksList.Location = new Point(29, 60);
+            userBooksList.Name = "userBooksList";
+            userBooksList.Size = new Size(749, 379);
+            userBooksList.TabIndex = 1;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(userBooksList);
             Controls.Add(mainTitleLabel);
             Name = "Main";
             Text = "Main";
@@ -54,5 +67,6 @@
         #endregion
 
         private Label mainTitleLabel;
+        private ListBox userBooksList;
     }
 }

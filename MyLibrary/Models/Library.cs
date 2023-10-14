@@ -52,5 +52,10 @@ namespace MyLibraryApp.Models
         {
             throw new NotImplementedException();
         }
+
+        public override string? SelectQuery(string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

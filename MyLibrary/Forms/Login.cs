@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,6 +40,7 @@ namespace MyLibrary.Forms
             else
             {
                 this.Username = usernameBox.Text;
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }

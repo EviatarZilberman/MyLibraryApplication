@@ -14,15 +14,17 @@ namespace MyLibrary.Forms
     {
         public Main()
         {
+            InitializeComponent();
             Login login = new Login(); // Creates a new instance of login screen.
             login.ShowDialog(); // Shows the login instance above all screens.
+
             if (login.DialogResult == DialogResult.OK && login.Username != null)
             {
-                mainTitleLabel.Text = $"Welcome {login.Username}!";
+                this.mainTitleLabel = new Label();
+                this.mainTitleLabel.Text += $" {login.Username}!";
                 this.Show();
             }
-            InitializeComponent();
-            
+
         }
     }
 }
