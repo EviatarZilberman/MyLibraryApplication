@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace MyLibrary.Forms
@@ -17,14 +18,13 @@ namespace MyLibrary.Forms
     public partial class Login : Form
     {
         public static User? LoggedUser { get; set; } = null;
-        public string Username { get; set; } = string.Empty;
 
         public Login()
         {
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private async void loginButton_Click(object sender, EventArgs e)
         {
             if ((!string.IsNullOrEmpty(usernameBox.Text) ||
                 !string.IsNullOrWhiteSpace(usernameBox.Text)) &&
@@ -32,16 +32,15 @@ namespace MyLibrary.Forms
                 !string.IsNullOrWhiteSpace(passwordBox.Text)))
             {
                 User? user = null;
-                User.SelectFromTable($"SELECT username, password FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}';", user);
-                if (user != null)
+                CoreReturns result = await User.SelectFromTable($"SELECT internal_id, creation_date, last_change, first_name, last_name, email, password, birth_date, username FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}'");
+                if (result == CoreReturns.SUCCESS)
                 {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Try again!");
-
                 }
             }
             else

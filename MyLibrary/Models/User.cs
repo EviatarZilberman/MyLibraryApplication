@@ -1,5 +1,7 @@
-﻿using Npgsql;
+﻿using MyLibrary.Forms;
+using Npgsql;
 using PostgreSQLDBManager;
+using System.Data;
 using System.Linq.Expressions;
 using Utilities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -69,11 +71,12 @@ namespace MyLibraryApp.Models
 
         public override string? UpdateQuery(Base b)
         {
-            return $@"UPDATE public.users SET first_name = '{this.FirstName}', last_name = '{this.LastName}', email = '{this.Email}', birth_date = '{this.BirthDate}', password = '{this.Password}' WHERE internal_id = '{this.Id}';";
+            return $@"UPDATE public.users SET first_name = '{this.FirstName}', last_name = '{this.LastName}', email = '{this.Email}', birth_date = '{this.BirthDate}', password = '{this.Password}' WHERE internal_id = '{this.Id}'";
         }
 
-        public static async Task<CoreReturns> SelectFromTable(string? query, User? user = null)
+        public static async Task<CoreReturns> SelectFromTable(string? query)
         {
+            await DBManager.ConnectionString.CloseAsync();
             await DBManager.ConnectionString.OpenAsync();
 
             try
@@ -84,7 +87,7 @@ namespace MyLibraryApp.Models
                     {
                         while (reader.Read())
                         {
-                            user = new User()
+                            Login.LoggedUser = new User()
                             {
                                 Id = reader.GetString(0),
                                 CreationDate = reader.GetDateTime(1),
@@ -93,11 +96,11 @@ namespace MyLibraryApp.Models
                                 LastName = reader.GetString(4),
                                 Email = reader.GetString(5),
                                 Password = reader.GetString(6),
-                                BirthDate = reader.GetDateTime(8),
-                                Username = reader.GetString(9),
+                                BirthDate = reader.GetDateTime(7),
+                                Username = reader.GetString(8),
                             };
-                            return CoreReturns.SUCCESS;
                         }
+                            await reader.CloseAsync();
                     }
                 }
             }
@@ -106,11 +109,47 @@ namespace MyLibraryApp.Models
                 LogWriter.Instance().WriteLog("User.SelectFromTable", e.Message);
                 return CoreReturns.ERROR;
             }
-            return CoreReturns.ERROR;
+            return CoreReturns.SUCCESS;
         }
     }
 }
-        
-   
 
+/*using Npgsql;
+using System;
 
+class Program
+{
+    static void Main()
+    {
+        string connectionString = "Host=myserver;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;";
+        string usernameInput = usernameBox.Text; // Get the username input from the user
+        string passwordInput = passwordBox.Text; // Get the password input from the user
+
+        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string sql = "SELECT username, password FROM public.users WHERE username = @username AND password = @password";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@username", usernameInput);
+                command.Parameters.AddWithValue("@password", passwordInput);
+
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    // Process the result
+                    if (reader.Read())
+                    {
+                        // Authentication successful, do something
+                    }
+                    else
+                    {
+                        // Authentication failed, handle accordingly
+                    }
+                }
+            }
+        }
+    }
+}
+*/
