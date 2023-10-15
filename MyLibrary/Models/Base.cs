@@ -4,7 +4,7 @@ namespace MyLibraryApp.Models
 {
     public abstract class Base
     {
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
         public string? Id { get; set; } = IdToString(Guid.NewGuid().ToString());
         public DateTime? LastChange { get; set; } = null;
         protected static string? IdToString(string? id)

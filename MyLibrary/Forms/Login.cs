@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.Logging;
 using MyLibraryApp.Models;
+using PostgreSQLDBManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace MyLibrary.Forms
 {
@@ -24,11 +26,23 @@ namespace MyLibrary.Forms
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if ((!string.IsNullOrEmpty(usernameBox.Text) || !string.IsNullOrWhiteSpace(usernameBox.Text)) && (!string.IsNullOrEmpty(passwordBox.Text) || !string.IsNullOrWhiteSpace(passwordBox.Text)))
+            if ((!string.IsNullOrEmpty(usernameBox.Text) ||
+                !string.IsNullOrWhiteSpace(usernameBox.Text)) &&
+                (!string.IsNullOrEmpty(passwordBox.Text) ||
+                !string.IsNullOrWhiteSpace(passwordBox.Text)))
             {
-                this.Username = usernameBox.Text;
+                User? user = null;
+                User.SelectFromTable($"SELECT username, password FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}';", user);
+                if (user != null)
+                {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Try again!");
+
+                }
             }
             else
             {

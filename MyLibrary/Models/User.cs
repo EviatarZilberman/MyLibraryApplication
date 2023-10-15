@@ -1,4 +1,8 @@
-﻿using Utilities;
+﻿using Npgsql;
+using PostgreSQLDBManager;
+using System.Linq.Expressions;
+using Utilities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MyLibraryApp.Models
 {
@@ -11,7 +15,9 @@ namespace MyLibraryApp.Models
         public string Password { get; set; } = string.Empty;
         public string ManipulatedPassword { get; set; } = string.Empty;
         public string? Username { get; set; } = string.Empty;
-        public User(string firstName, string lastName, string email, string password, string username, DateTime birthDate) 
+
+        public User() { }
+        public User(string firstName, string lastName, string email, string password, string username, DateTime birthDate)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -19,6 +25,19 @@ namespace MyLibraryApp.Models
             this.Password = password;
             this.BirthDate = birthDate;
             this.Username = username;
+        }
+
+        public User(DateTime creationDate, DateTime lastChange, string internalId, string firstName, string lastName, string email, string password, string username, DateTime birthDate)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = email;
+            this.Password = password;
+            this.BirthDate = birthDate;
+            this.Username = username;
+            this.CreationDate = creationDate;
+            this.LastChange = lastChange;
+            this.Id = internalId;
         }
 
         public override string? CreateQuery()
@@ -42,9 +61,56 @@ namespace MyLibraryApp.Models
             return $"SELECT username FROM public.users;";
         }
 
-        public override string? UpdateQuery(Base b) 
+      /*  public string? SelectQuery(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password)) return null;
+            return $"SELECT * FROM public.users WHERE username = '{username}' AND password = '{password}';";
+        }*/
+
+        public override string? UpdateQuery(Base b)
         {
             return $@"UPDATE public.users SET first_name = '{this.FirstName}', last_name = '{this.LastName}', email = '{this.Email}', birth_date = '{this.BirthDate}', password = '{this.Password}' WHERE internal_id = '{this.Id}';";
         }
+
+        public static async Task<CoreReturns> SelectFromTable(string? query, User? user = null)
+        {
+            await DBManager.ConnectionString.OpenAsync();
+
+            try
+            {
+                using (NpgsqlCommand command = new NpgsqlCommand(query, DBManager.ConnectionString))
+                {
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            user = new User()
+                            {
+                                Id = reader.GetString(0),
+                                CreationDate = reader.GetDateTime(1),
+                                LastChange = reader.GetDateTime(2),
+                                FirstName = reader.GetString(3),
+                                LastName = reader.GetString(4),
+                                Email = reader.GetString(5),
+                                Password = reader.GetString(6),
+                                BirthDate = reader.GetDateTime(8),
+                                Username = reader.GetString(9),
+                            };
+                            return CoreReturns.SUCCESS;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Instance().WriteLog("User.SelectFromTable", e.Message);
+                return CoreReturns.ERROR;
+            }
+            return CoreReturns.ERROR;
+        }
     }
 }
+        
+   
+
+
