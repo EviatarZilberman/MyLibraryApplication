@@ -7,10 +7,20 @@ namespace MyLibraryApp.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public DateOnly BirthDate { get; set; } = DateOnly.MinValue;
+        public DateTime BirthDate { get; set; } = DateTime.MinValue;
         public string Password { get; set; } = string.Empty;
         public string ManipulatedPassword { get; set; } = string.Empty;
-        
+        public string? Username { get; set; } = string.Empty;
+        public User(string firstName, string lastName, string email, string password, string username, DateTime birthDate) 
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = email;
+            this.Password = password;
+            this.BirthDate = birthDate;
+            this.Username = username;
+        }
+
         public override string? CreateQuery()
         {
             throw new NotImplementedException();
@@ -23,7 +33,7 @@ namespace MyLibraryApp.Models
 
         public override string? InsertQuery()
         {
-            return $@"Insert into public.users(creation_date, internal_id, first_name, last_name, email, birth_date, password) values('{this.CreationDate}', '{this.Id}', '{this.FirstName}', '{this.LastName}', '{this.Email}', '{this.BirthDate}', '{this.Password}')";
+            return $@"Insert into public.users(creation_date, internal_id, first_name, last_name, email, birth_date, password, username) values('{this.CreationDate}', '{this.Id}', '{this.FirstName}', '{this.LastName}', '{this.Email}', '{this.BirthDate}', '{this.Password}', '{this.Username}')";
         }
 
         public override string? SelectQuery(string key)

@@ -21,7 +21,6 @@ namespace MyLibrary.Forms
 
             if (login.DialogResult == DialogResult.OK && login.Username != null)
             {
-                //this.Username = login.Username;
                 this.MainTitleLabel = new Label();
                 this.MainTitleLabel.Size = new Size(250, 50);
                 this.MainTitleLabel.Text = $"Welcome, {login.Username}!";
