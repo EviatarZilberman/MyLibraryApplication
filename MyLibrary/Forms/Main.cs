@@ -36,5 +36,16 @@ namespace MyLibrary.Forms
 
             MessageBox.Show("Are you sure you want to delete ");
         }
+
+        private async void SearchButton_Click(object sender, EventArgs e)
+        {
+            Search search = new Search();
+            search.ShowDialog();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

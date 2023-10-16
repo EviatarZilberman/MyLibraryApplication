@@ -38,6 +38,8 @@
             publishDateBox = new DateTimePicker();
             searchButton = new Button();
             addButton = new Button();
+            languageLabel = new Label();
+            comboLanguageBox = new ComboBox();
             SuspendLayout();
             // 
             // searchTitleLabel
@@ -80,7 +82,7 @@
             // 
             searchedBooksList.FormattingEnabled = true;
             searchedBooksList.ItemHeight = 25;
-            searchedBooksList.Location = new Point(12, 237);
+            searchedBooksList.Location = new Point(12, 332);
             searchedBooksList.Name = "searchedBooksList";
             searchedBooksList.Size = new Size(776, 204);
             searchedBooksList.TabIndex = 4;
@@ -108,7 +110,7 @@
             // 
             // searchButton
             // 
-            searchButton.Location = new Point(676, 81);
+            searchButton.Location = new Point(676, 85);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(112, 34);
             searchButton.TabIndex = 5;
@@ -125,11 +127,33 @@
             addButton.Text = "Add";
             addButton.UseVisualStyleBackColor = true;
             // 
+            // languageLabel
+            // 
+            languageLabel.AutoSize = true;
+            languageLabel.Location = new Point(24, 246);
+            languageLabel.Name = "languageLabel";
+            languageLabel.Size = new Size(89, 25);
+            languageLabel.TabIndex = 7;
+            languageLabel.Text = "Language";
+            // 
+            // comboLanguageBox
+            // 
+            comboLanguageBox.FormattingEnabled = true;
+            comboLanguageBox.Items.AddRange(new object[] { "Hebrew", "English", "Aeabic", "Russian", "Idish", "Spanish" });
+            comboLanguageBox.Location = new Point(154, 246);
+            comboLanguageBox.Name = "comboLanguageBox";
+            comboLanguageBox.Size = new Size(299, 33);
+            comboLanguageBox.TabIndex = 3;
+            comboLanguageBox.Text = "Hebrew";
+            comboLanguageBox.SelectedIndexChanged += comboLanguageBox_SelectedIndexChanged;
+            // 
             // Search
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 548);
+            Controls.Add(comboLanguageBox);
+            Controls.Add(languageLabel);
             Controls.Add(addButton);
             Controls.Add(searchButton);
             Controls.Add(publishDateBox);
@@ -158,5 +182,7 @@
         private DateTimePicker publishDateBox;
         private Button searchButton;
         private Button addButton;
+        private Label languageLabel;
+        private ComboBox comboLanguageBox;
     }
 }

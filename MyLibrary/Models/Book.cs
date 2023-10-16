@@ -22,7 +22,6 @@ namespace MyLibraryApp.Models
         public string? LentTo { get; set; } = string.Empty;
         [Range(0, 10)]
         public int? Rank { get; set; }
-        public Byte[]? Image { get; set; } = null;
 
         public Book(Book b)
         {
@@ -34,14 +33,13 @@ namespace MyLibraryApp.Models
             this.AddedToMyLibrary = b.AddedToMyLibrary;
             this.LentTo = b.LentTo;
             this.Rank = b.Rank;
-            this.Image = b.Image;
         }
         public Book() { }
         public Book(string title, string? author = null,
             string? language = "Hebrew", string? type = null,
             DateTime? creationDate = null,
             DateTime? added = null, string? lentTo = null,
-            int? rank = null, Byte[]? image = null)
+            int? rank = null)
         {
             this.Title = title;
             this.Author = author;
@@ -51,7 +49,6 @@ namespace MyLibraryApp.Models
             this.AddedToMyLibrary = added;
             this.LentTo = lentTo;
             this.Rank = rank;
-            this.Image = image;
         }
 
         public override string? InsertQuery()

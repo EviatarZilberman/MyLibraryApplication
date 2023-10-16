@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\source\repos\APIAppDemo\APIApp\APIApp.csproj" />
     <ProjectReference Include="..\..\PostgreSQLDBManager\PostgreSQLDBManager.csproj" />
     <ProjectReference Include="..\..\Utilities\Utilities.csproj" />
   </ItemGroup>

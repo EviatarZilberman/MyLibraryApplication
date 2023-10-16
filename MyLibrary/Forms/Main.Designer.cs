@@ -52,6 +52,7 @@
             SearchButton.TabIndex = 2;
             SearchButton.Text = "Search";
             SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
             // 
             // DeleteButton
             // 
@@ -71,6 +72,7 @@
             EditButton.TabIndex = 4;
             EditButton.Text = "Edit";
             EditButton.UseVisualStyleBackColor = true;
+            EditButton.Click += EditButton_Click;
             // 
             // Main
             // 
