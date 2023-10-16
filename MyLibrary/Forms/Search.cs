@@ -16,5 +16,15 @@ namespace MyLibrary.Forms
         {
             InitializeComponent();
         }
+
+        private async void searchButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(bookNameBox.Text) || string.IsNullOrWhiteSpace(bookNameBox.Text))
+            {
+                MessageBox.Show("Name is invalid!");
+            }
+
+
+        }
     }
 }
