@@ -116,7 +116,7 @@ namespace MyLibrary.Forms
                 }
                 Books.Add(new Book()
                 {
-                    Title = Colboinik.ValidateQuery(results[0]),
+                    Title = results[0],
                     Author = results[1],
                     Language = results[2],
                     PublishDate = Colboinik.ConvertStringToDate(results[3]),
