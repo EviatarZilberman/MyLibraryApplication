@@ -21,6 +21,8 @@ namespace MyLibrary.Forms
     public partial class Search : Form
     {
         private static List<Book> Books { get; set; } = new List<Book>();
+        private static ListView ListView { get; set; } = new ListView();
+        private static List<Book> SavedBooks { get; set; } = new List<Book>();
         public Search()
         {
             ReInit();
@@ -109,7 +111,10 @@ namespace MyLibrary.Forms
                 book.SubItems.Add(Books[i].Type);
                 book.SubItems.Add(Books[i].Language);
                 book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
-
+                if (book.Selected)
+                {
+                    SavedBooks.Add(Books[i]);
+                }
                 searchedBooksList.Items.Add(book);
             }
             this.Controls.Add(searchedBooksList);
@@ -119,6 +124,14 @@ namespace MyLibrary.Forms
         {
 
         }
+
+     /*   private void addButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Books.Count; i++)
+            {
+                if (Books[i].Se)
+            }
+        }*/
     }
 }
 

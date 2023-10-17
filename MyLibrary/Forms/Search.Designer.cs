@@ -117,6 +117,7 @@
             addButton.TabIndex = 6;
             addButton.Text = "Add";
             addButton.UseVisualStyleBackColor = true;
+            //addButton.Click += addButton_Click;
             // 
             // languageLabel
             // 
@@ -140,11 +141,13 @@
             // 
             // searchedBooksList
             // 
+            searchedBooksList.CheckBoxes = true;
             searchedBooksList.Location = new Point(17, 294);
             searchedBooksList.Name = "searchedBooksList";
             searchedBooksList.Size = new Size(771, 242);
             searchedBooksList.TabIndex = 8;
             searchedBooksList.UseCompatibleStateImageBehavior = false;
+            searchedBooksList.View = View.Details;
             // 
             // Search
             // 
