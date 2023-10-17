@@ -63,6 +63,7 @@
             usernameBox.Name = "usernameBox";
             usernameBox.Size = new Size(231, 31);
             usernameBox.TabIndex = 2;
+            usernameBox.Text = "balor12";
             // 
             // passwordBox
             // 
@@ -70,6 +71,7 @@
             passwordBox.Name = "passwordBox";
             passwordBox.Size = new Size(231, 31);
             passwordBox.TabIndex = 4;
+            passwordBox.Text = "popmart123";
             // 
             // passwordLabel
             // 
