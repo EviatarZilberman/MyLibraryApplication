@@ -32,7 +32,6 @@
             bookNameLabel = new Label();
             authorLabel = new Label();
             publishDateLabel = new Label();
-            searchedBooksList = new ListBox();
             bookNameBox = new TextBox();
             authorBox = new TextBox();
             publishDateBox = new DateTimePicker();
@@ -40,6 +39,7 @@
             addButton = new Button();
             languageLabel = new Label();
             comboLanguageBox = new ComboBox();
+            searchedBooksList = new ListView();
             SuspendLayout();
             // 
             // searchTitleLabel
@@ -77,15 +77,6 @@
             publishDateLabel.Size = new Size(112, 25);
             publishDateLabel.TabIndex = 3;
             publishDateLabel.Text = "publish Date";
-            // 
-            // searchedBooksList
-            // 
-            searchedBooksList.FormattingEnabled = true;
-            searchedBooksList.ItemHeight = 25;
-            searchedBooksList.Location = new Point(12, 332);
-            searchedBooksList.Name = "searchedBooksList";
-            searchedBooksList.Size = new Size(776, 204);
-            searchedBooksList.TabIndex = 4;
             // 
             // bookNameBox
             // 
@@ -149,11 +140,20 @@
             comboLanguageBox.Text = "Hebrew";
             comboLanguageBox.SelectedIndexChanged += comboLanguageBox_SelectedIndexChanged;
             // 
+            // searchedBooksList
+            // 
+            searchedBooksList.Location = new Point(17, 294);
+            searchedBooksList.Name = "searchedBooksList";
+            searchedBooksList.Size = new Size(771, 242);
+            searchedBooksList.TabIndex = 8;
+            searchedBooksList.UseCompatibleStateImageBehavior = false;
+            // 
             // Search
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 548);
+            Controls.Add(searchedBooksList);
             Controls.Add(comboLanguageBox);
             Controls.Add(languageLabel);
             Controls.Add(addButton);
@@ -161,7 +161,6 @@
             Controls.Add(publishDateBox);
             Controls.Add(authorBox);
             Controls.Add(bookNameBox);
-            Controls.Add(searchedBooksList);
             Controls.Add(publishDateLabel);
             Controls.Add(authorLabel);
             Controls.Add(bookNameLabel);
@@ -178,7 +177,6 @@
         private Label bookNameLabel;
         private Label authorLabel;
         private Label publishDateLabel;
-        private ListBox searchedBooksList;
         private TextBox bookNameBox;
         private TextBox authorBox;
         private DateTimePicker publishDateBox;
@@ -186,5 +184,6 @@
         private Button addButton;
         private Label languageLabel;
         private ComboBox comboLanguageBox;
+        private ListView searchedBooksList;
     }
 }

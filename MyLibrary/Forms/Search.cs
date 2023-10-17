@@ -1,4 +1,5 @@
 ﻿using APIApp;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MyLibraryApp.Enums;
 using MyLibraryApp.Models;
 using Newtonsoft.Json.Linq;
@@ -11,17 +12,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities;
+using View = System.Windows.Forms.View;
 
 namespace MyLibrary.Forms
 {
     public partial class Search : Form
     {
+        private static List<Book> Books = new List<Book>();
         public Search()
         {
             InitializeComponent();
+            //  InitializeListView();
         }
 
-        private async void searchButton_Click2(object sender, EventArgs e)
+        private async void searchButton_Click_OLD(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(bookNameBox.Text) || string.IsNullOrWhiteSpace(bookNameBox.Text))
             {
@@ -73,7 +78,6 @@ namespace MyLibrary.Forms
             //    }
         }
 
-
         private void comboLanguageBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -89,8 +93,6 @@ namespace MyLibrary.Forms
 
             await APIAccessor.Instance().Get(bookNameBox.Text);
 
-            List<Book> books = new List<Book>();
-
             string[] keys = new string[5] { "title", "creator", "language", "date", "subject" };
             string[] results = new string[5];
 
@@ -104,28 +106,89 @@ namespace MyLibrary.Forms
 
                         if (parameter.Type == JTokenType.Array && ((JArray)parameter).Count > 0)
                         {
-                            // Assuming you want to concatenate the array elements as a single string
-                            results[j] = string.Join(", ", ((JArray)parameter).Select(p => p.ToString()));
+                            results[j] = Colboinik.ValidateQuery(string.Join(", ", ((JArray)parameter).Select(p => p.ToString())));
                         }
                         else if (parameter.Type == JTokenType.String)
                         {
-                            results[j] = parameter.ToString();
+                            results[j] = Colboinik.ValidateQuery(parameter.ToString());
                         }
                     }
                 }
-                    DateTime dt = DateTime.Now; // You might need to get the actual publish date from the JSON data
-                    books.Add(new Book()
-                    {
-                        Title = results[0],
-                        Author = results[1],
-                        Language = results[2],
-                        PublishDate = dt,
-                        Type = results[4]
-                    });
+                Books.Add(new Book()
+                {
+                    Title = Colboinik.ValidateQuery(results[0]),
+                    Author = results[1],
+                    Language = results[2],
+                    PublishDate = Colboinik.ConvertStringToDate(results[3]),
+                    Type = results[4]
+                });
             }
         }
+        private void InitializeListView()
+        {
+            // Create a new ListView
+            ListView listView = new ListView();
 
+            // Set its View property to Details
+            listView.View = View.Details;
 
+            // Add columns to the ListView
+            listView.Columns.Add("Column 1", 100);
+            listView.Columns.Add("Column 2", 150);
+
+            // Add items to the ListView
+            ListViewItem item1 = new ListViewItem("Item 1");
+            item1.SubItems.Add("Subitem 1");
+
+            ListViewItem item2 = new ListViewItem("Item 2");
+            item2.SubItems.Add("Subitem 2");
+
+            // Add the items to the ListView
+            listView.Items.Add(item1);
+            listView.Items.Add(item2);
+
+            // Set the location and size of the ListView
+            listView.Location = new System.Drawing.Point(12, 12);
+            listView.Size = new System.Drawing.Size(260, 200);
+
+            // Add the ListView to the form's Controls
+            this.Controls.Add(listView);
+        }
+
+        private void searchedBooksList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Create a new ListView
+            ListView listView = new ListView();
+
+            // Set its View property to Details
+            listView.View = System.Windows.Forms.View.Details;
+
+            // Add columns to the ListView
+            listView.Columns.Add("Name", 200);
+            listView.Columns.Add("Author", 150);
+            listView.Columns.Add("Subject", 150);
+            listView.Columns.Add("Language", 150);
+            listView.Columns.Add("Publish Date", 150);
+
+            // Add items to the ListView
+            ListViewItem item1 = new ListViewItem("Item 1");
+            item1.SubItems.Add("Subitem 1");
+
+            ListViewItem item2 = new ListViewItem("Item 2");
+            item2.SubItems.Add("Subitem 2");
+
+            // Add the items to the ListView
+            listView.Items.Add(item1);
+            listView.Items.Add(item2);
+
+            // Set the location and size of the ListView
+            listView.Location = new System.Drawing.Point(12, 12);
+            listView.Size = new System.Drawing.Size(260, 200);
+
+            // Add the ListView to the form's Controls
+            this.Controls.Add(listView);
+            this.Refresh();
+        }
     }
 }
 
