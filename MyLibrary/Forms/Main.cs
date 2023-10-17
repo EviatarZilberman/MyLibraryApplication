@@ -34,7 +34,7 @@ namespace MyLibrary.Forms
         private void DeleteButton_Click(object sender, EventArgs e)
         {
 
-            MessageBox.Show("Are you sure you want to delete ");
+            MessageBox.Show("Are you sure you want to delete?");
         }
 
         private async void SearchButton_Click(object sender, EventArgs e)
