@@ -23,7 +23,7 @@ namespace MyLibrary.Forms
         public Search()
         {
             InitializeComponent();
-            //  InitializeListView();
+            InitializeListView();
         }
 
         private async void searchButton_Click_OLD(object sender, EventArgs e)
@@ -127,14 +127,14 @@ namespace MyLibrary.Forms
         private void InitializeListView()
         {
             // Create a new ListView
-            ListView listView = new ListView();
+            //ListView listView = new ListView();
 
             // Set its View property to Details
-            listView.View = View.Details;
+            searchedBooksList.View = View.Details;
 
             // Add columns to the ListView
-            listView.Columns.Add("Column 1", 100);
-            listView.Columns.Add("Column 2", 150);
+            searchedBooksList.Columns.Add("Column 1", 100);
+            searchedBooksList.Columns.Add("Column 2", 150);
 
             // Add items to the ListView
             ListViewItem item1 = new ListViewItem("Item 1");
@@ -144,15 +144,15 @@ namespace MyLibrary.Forms
             item2.SubItems.Add("Subitem 2");
 
             // Add the items to the ListView
-            listView.Items.Add(item1);
-            listView.Items.Add(item2);
+            searchedBooksList.Items.Add(item1);
+            searchedBooksList.Items.Add(item2);
 
             // Set the location and size of the ListView
-            listView.Location = new System.Drawing.Point(12, 12);
-            listView.Size = new System.Drawing.Size(260, 200);
+           // listView.Location = new System.Drawing.Point(12, 12);
+           // listView.Size = new System.Drawing.Size(260, 200);
 
             // Add the ListView to the form's Controls
-            this.Controls.Add(listView);
+            this.Controls.Add(searchedBooksList);
         }
 
         private void searchedBooksList_SelectedIndexChanged(object sender, EventArgs e)
