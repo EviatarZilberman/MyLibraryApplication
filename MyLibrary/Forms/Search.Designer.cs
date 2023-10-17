@@ -84,7 +84,6 @@
             bookNameBox.Name = "bookNameBox";
             bookNameBox.Size = new Size(300, 31);
             bookNameBox.TabIndex = 0;
-            bookNameBox.Text = "ender's game";
             // 
             // authorBox
             // 
@@ -92,7 +91,6 @@
             authorBox.Name = "authorBox";
             authorBox.Size = new Size(300, 31);
             authorBox.TabIndex = 1;
-            authorBox.Text = "Orson Scott Card";
             // 
             // publishDateBox
             // 

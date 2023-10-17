@@ -35,6 +35,9 @@ namespace MyLibrary.Forms
 
         private async void searchButton_Click(object sender, EventArgs e)
         {
+            Books.Clear();
+            searchedBooksList.Items.Clear();
+
             if (string.IsNullOrEmpty(bookNameBox.Text) || string.IsNullOrWhiteSpace(bookNameBox.Text))
             {
                 MessageBox.Show("Name is invalid!");
@@ -84,33 +87,31 @@ namespace MyLibrary.Forms
             }
         }
 
-        private void ColumnsInit ()
+        private void ColumnsInit()
         {
             searchedBooksList.View = View.Details;
 
-            searchedBooksList.Columns.Add("Number", 30);
-            searchedBooksList.Columns.Add("Name", 200);
+            searchedBooksList.Columns.Add("Number", 50);
+            searchedBooksList.Columns.Add("Name", 250);
             searchedBooksList.Columns.Add("Author", 100);
             searchedBooksList.Columns.Add("Type", 100);
             searchedBooksList.Columns.Add("Language", 100);
-            searchedBooksList.Columns.Add("Publish Date", 100);
+            searchedBooksList.Columns.Add("Publish Date", 200);
         }
+
         private void InitializeListView()
         {
             for (int i = 0; i < Books.Count; i++)
             {
-                // Add items to the ListView
                 ListViewItem book = new ListViewItem($"{i + 1}");
                 book.SubItems.Add(Books[i].Title);
                 book.SubItems.Add(Books[i].Author);
                 book.SubItems.Add(Books[i].Type);
                 book.SubItems.Add(Books[i].Language);
-                book.SubItems.Add(Books[i].PublishDate.Value.ToString("dd/MM/yyyy"));
+                book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
 
-                // Add the items to the ListView
                 searchedBooksList.Items.Add(book);
             }
-            // Add the ListView to the form's Controls
             this.Controls.Add(searchedBooksList);
         }
 
