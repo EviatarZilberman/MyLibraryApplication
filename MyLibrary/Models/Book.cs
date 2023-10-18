@@ -22,6 +22,7 @@ namespace MyLibraryApp.Models
         public string? LentTo { get; set; } = string.Empty;
         [Range(0, 10)]
         public int? Rank { get; set; }
+        public bool SpecialPublishDate { get; set; } = false;
 
         public Book(Book b)
         {
@@ -33,13 +34,14 @@ namespace MyLibraryApp.Models
             this.AddedToMyLibrary = b.AddedToMyLibrary;
             this.LentTo = b.LentTo;
             this.Rank = b.Rank;
+            this.SpecialPublishDate = b.SpecialPublishDate;
         }
         public Book() { }
         public Book(string title, string? author = null,
             string? language = "Hebrew", string? type = null,
             DateTime? creationDate = null,
             DateTime? added = null, string? lentTo = null,
-            int? rank = null)
+            int? rank = null, bool specialPublishDate = false)
         {
             this.Title = title;
             this.Author = author;
@@ -49,6 +51,7 @@ namespace MyLibraryApp.Models
             this.AddedToMyLibrary = added;
             this.LentTo = lentTo;
             this.Rank = rank;
+            this.SpecialPublishDate= specialPublishDate;
         }
 
         public override string? InsertQuery()

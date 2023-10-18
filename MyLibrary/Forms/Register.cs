@@ -62,7 +62,7 @@ namespace MyLibrary.Forms
                 lastNameBox.Text, emailBox.Text,
                 passwordBox.Text,
                 UserNameBox.Text, birthDateOnlyBox.Value);
-                CoreReturns result = await DBManager.Instance().Insert(user.InsertQuery());
+            CoreReturns result = await DBManager.Instance().Insert(user.InsertQuery());
 
             if (result == CoreReturns.SUCCESS)
             {

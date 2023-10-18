@@ -198,7 +198,7 @@
             Controls.Add(usernameLabel);
             Controls.Add(vScrollBar1);
             Name = "Register";
-            Text = "Register";
+            Text = "MyLibrary- Register";
             ResumeLayout(false);
             PerformLayout();
         }

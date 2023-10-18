@@ -117,7 +117,7 @@
             addButton.TabIndex = 6;
             addButton.Text = "Add";
             addButton.UseVisualStyleBackColor = true;
-            //addButton.Click += addButton_Click;
+            addButton.Click += addButton_Click;
             // 
             // languageLabel
             // 
@@ -167,7 +167,7 @@
             Controls.Add(bookNameLabel);
             Controls.Add(searchTitleLabel);
             Name = "Search";
-            Text = "Search";
+            Text = "MyLibrary- Search";
             ResumeLayout(false);
             PerformLayout();
         }

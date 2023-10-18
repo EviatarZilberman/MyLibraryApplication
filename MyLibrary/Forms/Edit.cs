@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyLibrary.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,21 @@ using System.Windows.Forms;
 
 namespace MyLibrary.Forms
 {
-    public partial class Edit : Form
+    public partial class Edit : Form, ITable
     {
         public Edit()
         {
             InitializeComponent();
+        }
+
+        public void ColumnsInit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReInit()
+        {
+            throw new NotImplementedException();
         }
     }
 }

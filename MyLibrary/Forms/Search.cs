@@ -1,8 +1,10 @@
 ﻿using APIApp;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MyLibrary.Interfaces;
 using MyLibraryApp.Enums;
 using MyLibraryApp.Models;
 using Newtonsoft.Json.Linq;
+using PostgreSQLDBManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,16 +20,14 @@ using View = System.Windows.Forms.View;
 
 namespace MyLibrary.Forms
 {
-    public partial class Search : Form
+    public partial class Search : Form, ITable
     {
         private static List<Book> Books { get; set; } = new List<Book>();
-        private static ListView ListView { get; set; } = new ListView();
-        private static List<Book> SavedBooks { get; set; } = new List<Book>();
         public Search()
         {
-            ReInit();
+            this.ReInit();
             InitializeComponent();
-            ColumnsInit();
+            this.ColumnsInit();
         }
 
         private void comboLanguageBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace MyLibrary.Forms
 
         }
 
-        private async void searchButton_Click(object sender, EventArgs e)
+        private async void searchButton_Click(object sender, EventArgs e) // Searchs books by the book name.
         {
             Books.Clear();
             searchedBooksList.Items.Clear();
@@ -81,7 +81,7 @@ namespace MyLibrary.Forms
             InitializeListView();
         }
 
-        private void ReInit()
+        public void ReInit() // Clears the Books variable.
         {
             if (Books.Count > 0)
             {
@@ -89,32 +89,31 @@ namespace MyLibrary.Forms
             }
         }
 
-        private void ColumnsInit()
+        public void ColumnsInit() // Function to declare the columns of a specific table.
         {
             searchedBooksList.View = View.Details;
 
+            searchedBooksList.Columns.Add("", 50);
             searchedBooksList.Columns.Add("Number", 50);
             searchedBooksList.Columns.Add("Name", 250);
             searchedBooksList.Columns.Add("Author", 100);
             searchedBooksList.Columns.Add("Type", 100);
             searchedBooksList.Columns.Add("Language", 100);
-            searchedBooksList.Columns.Add("Publish Date", 200);
+            searchedBooksList.Columns.Add("Publish Date", 100);
         }
 
-        private void InitializeListView()
+        private void InitializeListView() // Represents all the found books in the ListView.
         {
             for (int i = 0; i < Books.Count; i++)
             {
-                ListViewItem book = new ListViewItem($"{i + 1}");
+                ListViewItem book = new ListViewItem("");
+                book.SubItems.Add($"{i + 1}");
                 book.SubItems.Add(Books[i].Title);
                 book.SubItems.Add(Books[i].Author);
                 book.SubItems.Add(Books[i].Type);
                 book.SubItems.Add(Books[i].Language);
                 book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
-                if (book.Selected)
-                {
-                    SavedBooks.Add(Books[i]);
-                }
+
                 searchedBooksList.Items.Add(book);
             }
             this.Controls.Add(searchedBooksList);
@@ -125,13 +124,28 @@ namespace MyLibrary.Forms
 
         }
 
-     /*   private void addButton_Click(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Books.Count; i++)
+            foreach (ListViewItem item in searchedBooksList.Items)
             {
-                if (Books[i].Se)
+                if (item.Checked)
+                {
+                    Book book = new Book()
+                    {
+                        Title = item.SubItems[2].Text,
+                        Author = item.SubItems[3].Text,
+                        Type = item.SubItems[4].Text,
+                        Language = item.SubItems[5].Text,
+                        PublishDate = Colboinik.ConvertStringToDate(item.SubItems[6].Text),
+                        ForeignId = Login.LoggedUser.Id,
+                        AddedToMyLibrary = DateTime.Now
+                    };
+                    DBManager.Instance().Insert(book.InsertQuery());
+                }
             }
-        }*/
+        }
+
+
     }
 }
 
