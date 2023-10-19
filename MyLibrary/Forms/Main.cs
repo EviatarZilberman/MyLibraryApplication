@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using MyLibrary.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,12 +12,13 @@ using System.Windows.Forms;
 
 namespace MyLibrary.Forms
 {
-    public partial class Main : Form
+    public partial class Main : Form, MyITable
     {
         public Label MainTitleLabel { get; set; } = new Label();
         public Main()
         {
             InitializeComponent();
+            ColumnsInit();
             Login login = new Login(); // Creates a new instance of login screen.
             login.ShowDialog(); // Shows the login instance above all screens.
 
@@ -45,7 +48,26 @@ namespace MyLibrary.Forms
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        public void ReInit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ColumnsInit()
+        {
+            userBooksList.View = View.Details;
+
+            userBooksList.Columns.Add("", 50);
+            userBooksList.Columns.Add("Number", 50);
+            userBooksList.Columns.Add("Name", 250);
+            userBooksList.Columns.Add("Author", 100);
+            userBooksList.Columns.Add("Type", 100);
+            userBooksList.Columns.Add("Language", 100);
+            userBooksList.Columns.Add("Publish Date", 100);
+
         }
     }
 }

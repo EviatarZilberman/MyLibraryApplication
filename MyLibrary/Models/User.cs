@@ -63,12 +63,6 @@ namespace MyLibraryApp.Models
             return $"SELECT username FROM public.users;";
         }
 
-      /*  public string? SelectQuery(string username, string password)
-        {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password)) return null;
-            return $"SELECT * FROM public.users WHERE username = '{username}' AND password = '{password}';";
-        }*/
-
         public override string? UpdateQuery(Base b)
         {
             return $@"UPDATE public.users SET first_name = '{this.FirstName}', last_name = '{this.LastName}', email = '{this.Email}', birth_date = '{this.BirthDate}', password = '{this.Password}' WHERE internal_id = '{this.Id}'";
@@ -114,42 +108,3 @@ namespace MyLibraryApp.Models
     }
 }
 
-/*using Npgsql;
-using System;
-
-class Program
-{
-    static void Main()
-    {
-        string connectionString = "Host=myserver;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;";
-        string usernameInput = usernameBox.Text; // Get the username input from the user
-        string passwordInput = passwordBox.Text; // Get the password input from the user
-
-        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-        {
-            connection.Open();
-
-            string sql = "SELECT username, password FROM public.users WHERE username = @username AND password = @password";
-
-            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
-            {
-                command.Parameters.AddWithValue("@username", usernameInput);
-                command.Parameters.AddWithValue("@password", passwordInput);
-
-                using (NpgsqlDataReader reader = command.ExecuteReader())
-                {
-                    // Process the result
-                    if (reader.Read())
-                    {
-                        // Authentication successful, do something
-                    }
-                    else
-                    {
-                        // Authentication failed, handle accordingly
-                    }
-                }
-            }
-        }
-    }
-}
-*/

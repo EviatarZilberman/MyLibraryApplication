@@ -20,7 +20,7 @@ using View = System.Windows.Forms.View;
 
 namespace MyLibrary.Forms
 {
-    public partial class Search : Form, ITable
+    public partial class Search : Form, MyITable
     {
         private static List<Book> Books { get; set; } = new List<Book>();
         public Search()
@@ -124,7 +124,7 @@ namespace MyLibrary.Forms
 
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private async void addButton_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem item in searchedBooksList.Items)
             {
@@ -137,10 +137,12 @@ namespace MyLibrary.Forms
                         Type = item.SubItems[4].Text,
                         Language = item.SubItems[5].Text,
                         PublishDate = Colboinik.ConvertStringToDate(item.SubItems[6].Text),
-                        ForeignId = Login.LoggedUser.Id,
-                        AddedToMyLibrary = DateTime.Now
+                        ForeignId = Login.LoggedUser?.Id,
+                        AddedToMyLibrary = DateTime.Now,
+                        LentTo = "Nobody",
+                        Rank = "Unknown"
                     };
-                    DBManager.Instance().Insert(book.InsertQuery());
+                    await DBManager.Instance().Insert(book.InsertQuery());
                 }
             }
         }

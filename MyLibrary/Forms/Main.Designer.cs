@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            userBooksList = new ListBox();
+            userBooksList = new ListView();
             SearchButton = new Button();
             DeleteButton = new Button();
             EditButton = new Button();
@@ -37,8 +37,6 @@
             // userBooksList
             // 
             userBooksList.AccessibleName = "userBooks";
-            userBooksList.FormattingEnabled = true;
-            userBooksList.ItemHeight = 25;
             userBooksList.Location = new Point(29, 110);
             userBooksList.Name = "userBooksList";
             userBooksList.Size = new Size(749, 329);
@@ -89,7 +87,7 @@
         }
 
         #endregion
-        private ListBox userBooksList;
+        private ListView userBooksList;
         private Button SearchButton;
         private Button DeleteButton;
         private Button EditButton;

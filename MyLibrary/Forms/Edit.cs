@@ -11,21 +11,11 @@ using System.Windows.Forms;
 
 namespace MyLibrary.Forms
 {
-    public partial class Edit : Form, ITable
+    public partial class Edit : Form
     {
         public Edit()
         {
             InitializeComponent();
-        }
-
-        public void ColumnsInit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReInit()
-        {
-            throw new NotImplementedException();
         }
     }
 }

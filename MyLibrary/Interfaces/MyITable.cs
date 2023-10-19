@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyLibrary.Interfaces
 {
-    public interface ITable
+    public interface MyITable
     {
         public void ReInit();
         public void ColumnsInit();
