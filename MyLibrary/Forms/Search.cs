@@ -102,7 +102,7 @@ namespace MyLibrary.Forms
             searchedBooksList.Columns.Add("Publish Date", 100);
         }
 
-        private void InitializeListView() // Represents all the found books in the ListView.
+        public void InitializeListView() // Represents all the found books in the ListView.
         {
             for (int i = 0; i < Books.Count; i++)
             {
@@ -146,8 +146,6 @@ namespace MyLibrary.Forms
                 }
             }
         }
-
-
     }
 }
 

@@ -8,7 +8,8 @@ namespace MyLibrary.Interfaces
 {
     public interface MyITable
     {
-        public void ReInit();
+        //public void ReInit();
         public void ColumnsInit();
+        public void InitializeListView();
     }
 }

@@ -31,8 +31,7 @@ namespace MyLibrary.Forms
                 (!string.IsNullOrEmpty(passwordBox.Text) ||
                 !string.IsNullOrWhiteSpace(passwordBox.Text)))
             {
-                //User? user = null;
-                CoreReturns result = await User.SelectFromTable($"SELECT internal_id, creation_date, last_change, first_name, last_name, email, password, birth_date, username FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}'");
+                CoreReturns result = await User.SelectUserFromTable($"SELECT internal_id, creation_date, last_change, first_name, last_name, email, password, birth_date, username FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}'");
                 if (result == CoreReturns.SUCCESS)
                 {
                     this.DialogResult = DialogResult.OK;

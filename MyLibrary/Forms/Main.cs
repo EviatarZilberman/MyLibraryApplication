@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using MyLibrary.Interfaces;
+using MyLibraryApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace MyLibrary.Forms
                 this.Controls.Add(this.MainTitleLabel);
                 this.Show();
             }
-
+            InitializeListView();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -40,7 +41,7 @@ namespace MyLibrary.Forms
             MessageBox.Show("Are you sure you want to delete?");
         }
 
-        private async void SearchButton_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
             Search search = new Search();
             search.ShowDialog();
@@ -49,11 +50,6 @@ namespace MyLibrary.Forms
         private void EditButton_Click(object sender, EventArgs e)
         {
 
-        }
-
-        public void ReInit()
-        {
-            throw new NotImplementedException();
         }
 
         public void ColumnsInit()
@@ -67,6 +63,14 @@ namespace MyLibrary.Forms
             userBooksList.Columns.Add("Type", 100);
             userBooksList.Columns.Add("Language", 100);
             userBooksList.Columns.Add("Publish Date", 100);
+
+        }
+
+        public void InitializeListView()
+        {
+            this.Refresh();
+            User.SelectBooksFromTable(@$"SELECT internal_id, creation_date, last_change, title, author, language, type, publish_date, add_to_my_library, lent_to, foreign_id, rank
+	FROM public.books where foreign_id = '{Login.LoggedUser.Id}';");
 
         }
     }

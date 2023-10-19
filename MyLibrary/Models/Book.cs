@@ -135,5 +135,10 @@ namespace MyLibraryApp.Models
         {
             throw new NotImplementedException();
         }
+
+        public static implicit operator List<object>(Book v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
