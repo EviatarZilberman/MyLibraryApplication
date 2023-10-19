@@ -120,29 +120,19 @@ namespace MyLibraryApp.Models
                     {
                         while (reader.Read())
                         {
-                            string Title = reader["title"].ToString();
-                            string Type = reader["type"].ToString();
-                            string CreationDate = reader.GetString(1);
-                                //DateTime LastChange = reader.GetDateTime(2);
-                                string Author = reader["author"].ToString();
-                                string Language = reader["language"].ToString();
-                                string Rank = reader["rank"].ToString();
-                                DateTime AddedToMyLibrary = reader.GetDateTime(7);
-                                DateTime PublishDate = reader.GetDateTime(7);
-                                string LentTo = reader["lent_to"].ToString();
                             Book book = new Book()
                             {
                                 Title = reader["title"].ToString(),
-                                Type = reader["type"].ToString(),
-                                CreationDate = reader.GetDateTime(1),
-                                //LastChange = reader.GetDateTime(2),
-                                //Author = reader["author"].ToString(),
-                                //Language = reader["language"].ToString(),
-                                //Rank = reader["rank"].ToString(),
-                                //AddedToMyLibrary = reader.GetDateTime(7),
-                                //PublishDate = reader.GetDateTime(7),
-                                //LentTo = reader["lent_to"].ToString()
-                            };
+                            Type = reader["type"].ToString(),
+                             //CreationDate = reader.GetString(1),
+                            //DateTime LastChange = reader.GetDateTime(2),
+                             Author = reader["author"].ToString(),
+                             Language = reader["language"].ToString(),
+                             Rank = reader["rank"].ToString(),
+                             AddedToMyLibrary = reader.GetDateTime(8),
+                             PublishDate = reader.GetDateTime(7),
+                             LentTo = reader["lent_to"].ToString()
+                        };
                             Login.LoggedUser?.Books.Add(book);
                         }
                         await reader.CloseAsync();
