@@ -37,10 +37,14 @@
             // userBooksList
             // 
             userBooksList.AccessibleName = "userBooks";
+            userBooksList.CheckBoxes = true;
             userBooksList.Location = new Point(29, 110);
             userBooksList.Name = "userBooksList";
             userBooksList.Size = new Size(749, 329);
+            userBooksList.Sorting = SortOrder.Ascending;
             userBooksList.TabIndex = 1;
+            userBooksList.UseCompatibleStateImageBehavior = false;
+            userBooksList.UseWaitCursor = true;
             // 
             // SearchButton
             // 

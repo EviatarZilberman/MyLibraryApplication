@@ -6,8 +6,10 @@ namespace MyLibraryApp.Models
     public abstract class Base
     {
         public DateTime? CreationDate { get; set; } = DateTime.Now;
+        public string? CreationDateString { get; set; } = string.Empty;
         public string? Id { get; set; } = IdToString(Guid.NewGuid().ToString());
         public DateTime? LastChange { get; set; } = null;
+        public string? LastChangeString { get; set; } = string.Empty;
         protected static string? IdToString(string? id)
         // Converts the Id to string for the PostgreSQL.
         {

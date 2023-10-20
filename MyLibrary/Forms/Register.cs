@@ -54,10 +54,10 @@ namespace MyLibrary.Forms
             {
                 MessageBox.Show("Password not confirmed!");
             }
-            if (this.birthDateOnlyBox.Value == null)
+          /*  if (this.birthDateOnlyBox.Value == null)
             {
                 MessageBox.Show("Birth date is invalid!");
-            }
+            }*/
             User user = new User(firstNameBox.Text,
                 lastNameBox.Text, emailBox.Text,
                 passwordBox.Text,

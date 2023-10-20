@@ -221,7 +221,6 @@
         private TextBox lastNameBox;
         private TextBox firstNameBox;
         private Button registerButton;
-        private DateTimePicker dateTimePicker1;
         private DateTimePicker birthDateOnlyBox;
     }
 }

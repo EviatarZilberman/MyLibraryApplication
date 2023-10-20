@@ -124,7 +124,7 @@ namespace MyLibrary.Forms
 
         }
 
-        private async void addButton_Click(object sender, EventArgs e)
+        private async void addButton_Click(object sender, EventArgs e) // Functions well!
         {
             foreach (ListViewItem item in searchedBooksList.Items)
             {

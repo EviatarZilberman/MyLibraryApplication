@@ -24,7 +24,7 @@ namespace MyLibraryApp.Models
         public string? LentTo { get; set; } = "Not Lent";
         [Range(0, 10)]
         public string? Rank { get; set; } = DEFAULT;
-        private static readonly string DEFAULT = "Unknown";
+        public static readonly string DEFAULT = "Unknown";
 
         public Book(Book b)
         {

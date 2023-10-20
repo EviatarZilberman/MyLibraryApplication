@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace MyLibrary.Forms
 {
     public partial class Login : Form
     {
+        [AllowNull]
         public static User? LoggedUser { get; set; } = null;
 
         public Login()

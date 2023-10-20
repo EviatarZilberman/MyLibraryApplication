@@ -1,4 +1,5 @@
 ﻿using MyLibrary.Forms;
+using MyLibraryApp.Enums;
 using Npgsql;
 using PostgreSQLDBManager;
 using System.Data;
@@ -120,19 +121,39 @@ namespace MyLibraryApp.Models
                     {
                         while (reader.Read())
                         {
-                            Book book = new Book()
+                            Book book = null;
+                            
+                            try { 
+                                book = new Book()
+                                {
+                                    Title = reader["title"].ToString(),
+                                    Type = reader["type"].ToString(),
+                                    //CreationDate = Colboinik.ConvertStringToDate(reader.GetString(1)),
+                                    LastChange = reader.GetDateTime(2),
+                                    Author = reader["author"].ToString(),
+                                    Language = reader["language"].ToString(),
+                                    Rank = reader["rank"].ToString(),
+                                    AddedToMyLibrary = reader.GetDateTime(8),
+                                    PublishDate = reader.GetDateTime(7),
+                                    LentTo = reader["lent_to"].ToString()
+                                };
+                            }
+                            catch
                             {
-                                Title = reader["title"].ToString(),
-                            Type = reader["type"].ToString(),
-                             //CreationDate = reader.GetString(1),
-                            //DateTime LastChange = reader.GetDateTime(2),
-                             Author = reader["author"].ToString(),
-                             Language = reader["language"].ToString(),
-                             Rank = reader["rank"].ToString(),
-                             AddedToMyLibrary = reader.GetDateTime(8),
-                             PublishDate = reader.GetDateTime(7),
-                             LentTo = reader["lent_to"].ToString()
-                        };
+                                 book = new Book()
+                                {
+                                    Title = reader["title"].ToString(),
+                                    Type = reader["type"].ToString(),
+                                    //CreationDateString = Book.DEFAULT,
+                                    LastChangeString = string.Empty,
+                                    Author = reader["author"].ToString(),
+                                    Language = reader["language"].ToString(),
+                                    Rank = reader["rank"].ToString(),
+                                    AddedToMyLibrary = reader.GetDateTime(8),
+                                    PublishDate = reader.GetDateTime(7),
+                                    LentTo = reader["lent_to"].ToString()
+                                };
+                            }
                             Login.LoggedUser?.Books.Add(book);
                         }
                         await reader.CloseAsync();
@@ -141,7 +162,7 @@ namespace MyLibraryApp.Models
             }
             catch (Exception e)
             {
-                LogWriter.Instance().WriteLog("User.SelectUserFromTable", e.Message);
+                LogWriter.Instance().WriteLog("User.SelectBooksFromTable", e.Message);
                 return CoreReturns.ERROR;
             }
             return CoreReturns.SUCCESS;
