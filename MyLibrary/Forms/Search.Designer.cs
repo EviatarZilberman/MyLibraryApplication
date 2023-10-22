@@ -171,7 +171,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
-
         #endregion
 
         private Label searchTitleLabel;

@@ -1,6 +1,6 @@
 ﻿namespace MyLibrary.Forms
 {
-    partial class Main
+    partial class MainScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -44,7 +44,6 @@
             userBooksList.Sorting = SortOrder.Ascending;
             userBooksList.TabIndex = 1;
             userBooksList.UseCompatibleStateImageBehavior = false;
-            userBooksList.UseWaitCursor = true;
             // 
             // SearchButton
             // 
@@ -76,7 +75,7 @@
             EditButton.UseVisualStyleBackColor = true;
             EditButton.Click += EditButton_Click;
             // 
-            // Main
+            // MainScreen
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -85,7 +84,7 @@
             Controls.Add(DeleteButton);
             Controls.Add(SearchButton);
             Controls.Add(userBooksList);
-            Name = "Main";
+            Name = "MainScreen";
             Text = "MyLibrary- Main";
             ResumeLayout(false);
         }

@@ -145,6 +145,7 @@ namespace MyLibrary.Forms
                     await DBManager.Instance().Insert(book.InsertQuery());
                 }
             }
+            Login.LoggedUser?.Books.Clear();
         }
     }
 }

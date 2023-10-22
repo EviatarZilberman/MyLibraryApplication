@@ -122,11 +122,12 @@ namespace MyLibraryApp.Models
                         while (reader.Read())
                         {
                             Book book = null;
-                            
-                            try { 
+                            try
+                            { 
                                 book = new Book()
                                 {
                                     Title = reader["title"].ToString(),
+                                    ForeignId = reader["foreign_id"].ToString(),
                                     Type = reader["type"].ToString(),
                                     //CreationDate = Colboinik.ConvertStringToDate(reader.GetString(1)),
                                     LastChange = reader.GetDateTime(2),
@@ -142,7 +143,8 @@ namespace MyLibraryApp.Models
                             {
                                  book = new Book()
                                 {
-                                    Title = reader["title"].ToString(),
+                                     ForeignId = reader["foreign_id"].ToString(),
+                                     Title = reader["title"].ToString(),
                                     Type = reader["type"].ToString(),
                                     //CreationDateString = Book.DEFAULT,
                                     LastChangeString = string.Empty,
