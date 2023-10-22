@@ -128,6 +128,7 @@ namespace MyLibraryApp.Models
                                 {
                                     Title = reader["title"].ToString(),
                                     ForeignId = reader["foreign_id"].ToString(),
+                                    Id = reader["internal_id"].ToString(),
                                     Type = reader["type"].ToString(),
                                     //CreationDate = Colboinik.ConvertStringToDate(reader.GetString(1)),
                                     LastChange = reader.GetDateTime(2),
@@ -144,6 +145,7 @@ namespace MyLibraryApp.Models
                                  book = new Book()
                                 {
                                      ForeignId = reader["foreign_id"].ToString(),
+                                     Id = reader["internal_id"].ToString(),
                                      Title = reader["title"].ToString(),
                                     Type = reader["type"].ToString(),
                                     //CreationDateString = Book.DEFAULT,

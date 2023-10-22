@@ -45,25 +45,48 @@ namespace MyLibrary.Forms
 
         private async void DeleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult messageBox = MessageBox.Show("Are you sure you want to delete?");
-            if (messageBox != DialogResult.OK)
+            int isChecked = 0;
+
+            foreach (ListViewItem item in userBooksList.Items)
+            {
+                if (item.Checked)
+                {
+                    isChecked++;
+                }
+            }
+            if (isChecked == 0) // If the variable equals 0 nothing happens.
+            {
+                 MessageBox.Show("No Items are checked!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                return;
+            }
+
+            DialogResult messageBox = MessageBox.Show("Are you sure you want to delete?", "Delete Books", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            
+            if (messageBox == DialogResult.Cancel)
             {
                 return;
             }
             if (messageBox == DialogResult.OK)
             {
-                int isChecked = 0, deleted = 0;
+                int  deleted = 0;
                 foreach (ListViewItem item in userBooksList.Items)
                 {
                     if (item.Checked)
                     {
-                        isChecked++;
-                        if (await DBManager.Instance().Delete($@"DELETE FROM public.books WHERE foreign_id = '{item.SubItems[10].Text}';") == CoreReturns.SUCCESS)
+                        if (await DBManager.Instance().Delete($@"DELETE FROM public.books WHERE foreign_id = '{item.SubItems[10].Text}' AND internal_id = '{item.SubItems[11].Text}';") == CoreReturns.SUCCESS)
                         {
                             deleted++;
                         }
                     }
                 }
+                
+               
+                    Login.LoggedUser?.Books.Clear();
+                    userBooksList.Items.Clear();
+                    this.InitializeListView();
+                
+                MessageBox.Show($"{deleted} book(s) was deleted!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -119,6 +142,7 @@ namespace MyLibrary.Forms
                 book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToString("dd/MM/yyyy"));
                 book.SubItems.Add(Login.LoggedUser.Books[i].LentTo);
                 book.SubItems.Add(Login.LoggedUser.Books[i].ForeignId);
+                book.SubItems.Add(Login.LoggedUser.Books[i].Id);
 
                 userBooksList.Items.Add(book);
             }
