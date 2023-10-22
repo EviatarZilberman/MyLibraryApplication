@@ -52,6 +52,7 @@ namespace MyLibrary.Forms
                 if (item.Checked)
                 {
                     isChecked++;
+                    break;
                 }
             }
             if (isChecked == 0) // If the variable equals 0 nothing happens.
