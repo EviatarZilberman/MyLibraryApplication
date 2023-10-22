@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -126,7 +127,7 @@ namespace MyLibrary.Forms
 
         private async void addButton_Click(object sender, EventArgs e) // Functions well!
         {
-            foreach (ListViewItem item in searchedBooksList.Items)
+                    foreach (ListViewItem item in searchedBooksList.Items)
             {
                 if (item.Checked)
                 {
