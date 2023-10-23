@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities;
 using static System.Reflection.Metadata.BlobBuilder;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MyLibrary.Forms
 {
@@ -29,15 +30,15 @@ namespace MyLibrary.Forms
             this.Enabled = false;
             userBooksList.Enabled = false;
             Login login = new Login(); // Creates a new instance of login screen.
-           /* while (login.DialogResult != DialogResult.OK)
-            {*/
-                login.ShowDialog(); // Shows the login instance above all screens.
-           // }
-           /*if (login.DialogResult != DialogResult.OK)
-            {
-               
-                this.Close();
-            }*/
+            /* while (login.DialogResult != DialogResult.OK)
+             {*/
+            login.ShowDialog(); // Shows the login instance above all screens.
+                                // }
+            /*if (login.DialogResult != DialogResult.OK)
+             {
+
+                 this.Close();
+             }*/
             if (login.DialogResult == DialogResult.OK)
             {
                 this.MainTitleLabel = new Label();
@@ -110,7 +111,7 @@ namespace MyLibrary.Forms
             if (closingEvent.CloseReason == CloseReason.UserClosing)
             {
                 userBooksList.Items.Clear();
-                
+
                 this.InitializeListView();
             }
         }
@@ -144,7 +145,8 @@ namespace MyLibrary.Forms
             for (int i = 0; i < Login.LoggedUser?.Books.Count; i++)
             {
                 ListViewItem book = new ListViewItem("");
-                book.SubItems.Add($"{i + 1}");
+                book.Tag = (Action)(() => this.Edit());
+                book.SubItems.Add($"#{i + 1}");
                 book.SubItems.Add(Login.LoggedUser.Books[i].Title);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Author);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Type);
@@ -158,8 +160,53 @@ namespace MyLibrary.Forms
 
                 userBooksList.Items.Add(book);
             }
+            userBooksList.DrawSubItem += userBooksList_DrawSubItem;
+            userBooksList.ItemActivate += userBooksList_ItemActivate;
             this.Controls.Add(userBooksList);
         }
+        private void userBooksList_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            e.DrawDefault = true;
 
+            // Check if the column index is for the "Link" column (1 in this example)
+            if (e.ColumnIndex != 1)
+            {
+                // Customize the hyperlink appearance
+                e.Graphics.DrawString(e.SubItem.Text, new Font("Arial", 10, FontStyle.Underline),
+                    new SolidBrush(Color.Blue), e.Bounds.Location);
+
+                // You can also change the cursor to a hand when hovering over the link
+                if (e.Bounds.Contains(userBooksList.PointToClient(Cursor.Position)))
+                    userBooksList.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                // Reset the cursor to default for other columns
+                userBooksList.Cursor = Cursors.Default;
+            }
+        }
+        /*  e.DrawDefault = true;
+          if (e.ColumnIndex == 1)
+          {
+              e.Graphics.DrawString(e.SubItem.Text, new Font("Arial", 10, FontStyle.Underline),
+                  new SolidBrush(Color.Blue), e.Bounds.Location);
+          }*/
+
+
+        public async Task<CoreReturns> Edit()
+        {
+            MessageBox.Show("Hello!");
+            return CoreReturns.SUCCESS;
+        }
+
+        private void userBooksList_ItemActivate(object sender, EventArgs e)
+        {
+            /*if (userBooksList.SelectedItems.Count > 0)
+            {*/
+            var selectedItem = userBooksList.SelectedItems[0];
+            var action = selectedItem.Tag as Action;
+            action?.Invoke();
+            //}
+        }
     }
 }

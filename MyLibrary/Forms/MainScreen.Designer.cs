@@ -44,6 +44,7 @@
             userBooksList.Sorting = SortOrder.Ascending;
             userBooksList.TabIndex = 1;
             userBooksList.UseCompatibleStateImageBehavior = false;
+            userBooksList.View = View.Details;
             // 
             // SearchButton
             // 
