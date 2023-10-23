@@ -27,10 +27,18 @@ namespace MyLibrary.Forms
             InitializeComponent();
             ColumnsInit();
             this.Enabled = false;
+            userBooksList.Enabled = false;
             Login login = new Login(); // Creates a new instance of login screen.
-            login.ShowDialog(); // Shows the login instance above all screens.
-
-            if (login.DialogResult == DialogResult.OK && Login.LoggedUser.Username != null)
+           /* while (login.DialogResult != DialogResult.OK)
+            {*/
+                login.ShowDialog(); // Shows the login instance above all screens.
+           // }
+           /*if (login.DialogResult != DialogResult.OK)
+            {
+               
+                this.Close();
+            }*/
+            if (login.DialogResult == DialogResult.OK)
             {
                 this.MainTitleLabel = new Label();
                 this.MainTitleLabel.Size = new Size(250, 50);
@@ -38,6 +46,7 @@ namespace MyLibrary.Forms
                 this.MainTitleLabel.Location = new Point(10, 10); // Set the position of the label.
                 this.Controls.Add(this.MainTitleLabel);
                 this.Enabled = true;
+                userBooksList.Enabled = true;
                 this.Show();
             }
             InitializeListView();
@@ -57,20 +66,20 @@ namespace MyLibrary.Forms
             }
             if (isChecked == 0) // If the variable equals 0 nothing happens.
             {
-                 MessageBox.Show("No Items are checked!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("No Items are checked!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 return;
             }
 
             DialogResult messageBox = MessageBox.Show("Are you sure you want to delete?", "Delete Books", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            
+
             if (messageBox == DialogResult.Cancel)
             {
                 return;
             }
             if (messageBox == DialogResult.OK)
             {
-                int  deleted = 0;
+                int deleted = 0;
                 foreach (ListViewItem item in userBooksList.Items)
                 {
                     if (item.Checked)
@@ -81,12 +90,12 @@ namespace MyLibrary.Forms
                         }
                     }
                 }
-                
-               
-                    Login.LoggedUser?.Books.Clear();
-                    userBooksList.Items.Clear();
-                    this.InitializeListView();
-                
+
+
+                Login.LoggedUser?.Books.Clear();
+                userBooksList.Items.Clear();
+                this.InitializeListView();
+
                 MessageBox.Show($"{deleted} book(s) was deleted!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -101,6 +110,7 @@ namespace MyLibrary.Forms
             if (closingEvent.CloseReason == CloseReason.UserClosing)
             {
                 userBooksList.Items.Clear();
+                
                 this.InitializeListView();
             }
         }
@@ -129,6 +139,7 @@ namespace MyLibrary.Forms
 
         private async void InitializeListView()
         {
+            Login.LoggedUser?.Books.Clear();
             await User.SelectBooksFromTable(SELECT_BOOKS_PER_USER_QUERY);
             for (int i = 0; i < Login.LoggedUser?.Books.Count; i++)
             {

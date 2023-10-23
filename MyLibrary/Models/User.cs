@@ -97,6 +97,10 @@ namespace MyLibraryApp.Models
                             };
                         }
                             await reader.CloseAsync();
+                        if (Login.LoggedUser != null)
+                        {
+                            return CoreReturns.SUCCESS;
+                        }
                     }
                 }
             }
@@ -105,7 +109,7 @@ namespace MyLibraryApp.Models
                 LogWriter.Instance().WriteLog("User.SelectUserFromTable", e.Message);
                 return CoreReturns.ERROR;
             }
-            return CoreReturns.SUCCESS;
+            return CoreReturns.ANOTHER_ERROR_SEE_LOGS;
         }
 
         public static async Task<CoreReturns> SelectBooksFromTable(string? query)

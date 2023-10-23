@@ -41,12 +41,14 @@ namespace MyLibrary.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Try again!");
+                    this.DialogResult = DialogResult.Abort;
+                    MessageBox.Show("Try again!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Username or password are invalid!");
+                this.DialogResult = DialogResult.Abort;
+                MessageBox.Show("Username or password are invalid!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
