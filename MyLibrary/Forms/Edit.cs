@@ -13,8 +13,10 @@ namespace MyLibrary.Forms
 {
     public partial class Edit : Form
     {
+        private static ListViewItem Book = null;
         public Edit(ListViewItem book)
         {
+            Book = book;
             InitializeComponent();
             this.title_textBox.Text = book.SubItems[0].Text;
             this.author_textBox.Text = book.SubItems[1].Text;
@@ -24,11 +26,6 @@ namespace MyLibrary.Forms
             this.rank_textBox.Text = book.SubItems[5].Text;
             this.lentTo_textBox.Text = book.SubItems[7].Text;
             this.InitEdit();
-
-        }
-        public Edit()
-        {
-            InitializeComponent();
         }
 
         private void InitEdit()
@@ -40,6 +37,11 @@ namespace MyLibrary.Forms
             this.language_textBox = new TextBox();
             this.type_textBox = new TextBox();
             this.added_dateTimePicker = new DateTimePicker();
+        }
+
+        private void editBook_button_Click(object sender, EventArgs e)
+        {
+            //UPDATE public.books SET internal_id =?, creation_date =?, last_change =?, title =?, author =?, language =?, type =?, publish_date =?, add_to_my_library =?, lent_to =?, foreign_id =?, rank =? WHERE foreign_id = '?????';
         }
     }
 }

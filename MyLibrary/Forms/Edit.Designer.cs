@@ -54,6 +54,7 @@
             editBook_button.TabIndex = 8;
             editBook_button.Text = "Edit Book";
             editBook_button.UseVisualStyleBackColor = true;
+            editBook_button.Click += editBook_button_Click;
             // 
             // title_textBox
             // 
