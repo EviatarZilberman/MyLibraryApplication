@@ -19,7 +19,8 @@ namespace MyLibraryApp.Models
         public string ManipulatedPassword { get; set; } = string.Empty;
         public string? Username { get; set; } = string.Empty;
         public List<Book> Books { get; set; } = new List<Book>();
-
+        public static readonly string SELECT_BOOKS_PER_USER_QUERY = @$"SELECT internal_id, creation_date, last_change, title, author, language, type, publish_date, add_to_my_library, lent_to, foreign_id, rank
+	    FROM public.books where foreign_id = '{Login.LoggedUser?.Id}';";
         public User() { }
         public User(string firstName, string lastName, string email, string password, string username, DateTime birthDate)
         {

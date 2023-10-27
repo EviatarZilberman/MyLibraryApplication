@@ -21,8 +21,7 @@ namespace MyLibrary.Forms
     {
         public Label MainTitleLabel { get; set; } = new Label();
 
-        private static readonly string SELECT_BOOKS_PER_USER_QUERY = @$"SELECT internal_id, creation_date, last_change, title, author, language, type, publish_date, add_to_my_library, lent_to, foreign_id, rank
-	    FROM public.books where foreign_id = '{Login.LoggedUser?.Id}';";
+
         public MainScreen()
         {
             InitializeComponent();
@@ -30,15 +29,7 @@ namespace MyLibrary.Forms
             this.Enabled = false;
             userBooksList.Enabled = false;
             Login login = new Login(); // Creates a new instance of login screen.
-            /* while (login.DialogResult != DialogResult.OK)
-             {*/
             login.ShowDialog(); // Shows the login instance above all screens.
-                                // }
-            /*if (login.DialogResult != DialogResult.OK)
-             {
-
-                 this.Close();
-             }*/
             if (login.DialogResult == DialogResult.OK)
             {
                 this.MainTitleLabel = new Label();
@@ -55,50 +46,11 @@ namespace MyLibrary.Forms
 
         private async void DeleteButton_Click(object sender, EventArgs e)
         {
-            int isChecked = 0;
-
-            foreach (ListViewItem item in userBooksList.Items)
-            {
-                if (item.Checked)
-                {
-                    isChecked++;
-                    break;
-                }
-            }
-            if (isChecked == 0) // If the variable equals 0 nothing happens.
-            {
-                MessageBox.Show("No Items are checked!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-
-                return;
-            }
-
-            DialogResult messageBox = MessageBox.Show("Are you sure you want to delete?", "Delete Books", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (messageBox == DialogResult.Cancel)
-            {
-                return;
-            }
-            if (messageBox == DialogResult.OK)
-            {
-                int deleted = 0;
-                foreach (ListViewItem item in userBooksList.Items)
-                {
-                    if (item.Checked)
-                    {
-                        if (await DBManager.Instance().Delete($@"DELETE FROM public.books WHERE foreign_id = '{item.SubItems[10].Text}' AND internal_id = '{item.SubItems[11].Text}';") == CoreReturns.SUCCESS)
-                        {
-                            deleted++;
-                        }
-                    }
-                }
-
-
-                Login.LoggedUser?.Books.Clear();
-                userBooksList.Items.Clear();
-                this.InitializeListView();
-
-                MessageBox.Show($"{deleted} book(s) was deleted!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            Delete delete = new Delete();
+            delete.ShowDialog();
+            Login.LoggedUser?.Books.Clear();
+            userBooksList.Items.Clear();
+            this.InitializeListView();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -125,8 +77,6 @@ namespace MyLibrary.Forms
         {
             userBooksList.View = View.Details;
 
-            userBooksList.Columns.Add("", 50);
-            userBooksList.Columns.Add("Number", 50);
             userBooksList.Columns.Add("Name", 250);
             userBooksList.Columns.Add("Author", 100);
             userBooksList.Columns.Add("Type", 100);
@@ -135,19 +85,16 @@ namespace MyLibrary.Forms
             userBooksList.Columns.Add("Rank", 100);
             userBooksList.Columns.Add("Added The Library", 100);
             userBooksList.Columns.Add("Lent To", 100);
-
         }
 
         private async void InitializeListView()
         {
             Login.LoggedUser?.Books.Clear();
-            await User.SelectBooksFromTable(SELECT_BOOKS_PER_USER_QUERY);
+            await User.SelectBooksFromTable(User.SELECT_BOOKS_PER_USER_QUERY);
             for (int i = 0; i < Login.LoggedUser?.Books.Count; i++)
             {
-                ListViewItem book = new ListViewItem("");
-                book.Tag = (Action)(() => this.Edit());
-                book.SubItems.Add($"#{i + 1}");
-                book.SubItems.Add(Login.LoggedUser.Books[i].Title);
+                ListViewItem book = new ListViewItem(Login.LoggedUser.Books[i].Title);
+                
                 book.SubItems.Add(Login.LoggedUser.Books[i].Author);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Type);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Language);
@@ -157,6 +104,7 @@ namespace MyLibrary.Forms
                 book.SubItems.Add(Login.LoggedUser.Books[i].LentTo);
                 book.SubItems.Add(Login.LoggedUser.Books[i].ForeignId);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Id);
+                book.Tag = (Action)(() => this.Edit(book));
 
                 userBooksList.Items.Add(book);
             }
@@ -184,18 +132,19 @@ namespace MyLibrary.Forms
                 // Reset the cursor to default for other columns
                 userBooksList.Cursor = Cursors.Default;
             }
+            e.DrawDefault = true;
+            if (e.ColumnIndex == 1)
+            {
+                e.Graphics.DrawString(e.SubItem.Text, new Font("Arial", 10, FontStyle.Underline),
+                    new SolidBrush(Color.Blue), e.Bounds.Location);
+            }
         }
-        /*  e.DrawDefault = true;
-          if (e.ColumnIndex == 1)
-          {
-              e.Graphics.DrawString(e.SubItem.Text, new Font("Arial", 10, FontStyle.Underline),
-                  new SolidBrush(Color.Blue), e.Bounds.Location);
-          }*/
 
 
-        public async Task<CoreReturns> Edit()
+    public async Task<CoreReturns> Edit(ListViewItem book)
         {
-            MessageBox.Show("Hello!");
+            Edit edit = new Edit(book);
+            edit.ShowDialog();
             return CoreReturns.SUCCESS;
         }
 

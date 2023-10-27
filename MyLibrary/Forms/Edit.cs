@@ -13,6 +13,11 @@ namespace MyLibrary.Forms
 {
     public partial class Edit : Form
     {
+        public Edit (ListViewItem book)
+        {
+            InitializeComponent();
+
+        }
         public Edit()
         {
             InitializeComponent();

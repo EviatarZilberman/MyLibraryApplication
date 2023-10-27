@@ -37,7 +37,6 @@
             // userBooksList
             // 
             userBooksList.AccessibleName = "userBooks";
-            userBooksList.CheckBoxes = true;
             userBooksList.Location = new Point(29, 110);
             userBooksList.Name = "userBooksList";
             userBooksList.Size = new Size(749, 329);
