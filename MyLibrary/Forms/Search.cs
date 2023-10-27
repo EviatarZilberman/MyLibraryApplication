@@ -27,7 +27,7 @@ namespace MyLibrary.Forms
         public Search()
         {
             this.ReInit();
-            InitializeComponent();
+            this.InitializeComponent();
             this.ColumnsInit();
         }
 

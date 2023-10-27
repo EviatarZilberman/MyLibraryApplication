@@ -21,7 +21,6 @@ namespace MyLibrary.Forms
     {
         public Label MainTitleLabel { get; set; } = new Label();
 
-
         public MainScreen()
         {
             InitializeComponent();
