@@ -38,9 +38,6 @@ namespace MyLibrary.Forms
 
         private async void searchButton_Click(object sender, EventArgs e) // Searchs books by the book name.
         {
-         /*   Books.Clear();
-            searchedBooksList.Items.Clear();*/
-
             if (string.IsNullOrEmpty(bookNameBox.Text) || string.IsNullOrWhiteSpace(bookNameBox.Text))
             {
                 MessageBox.Show("Name is invalid!");
@@ -146,7 +143,6 @@ namespace MyLibrary.Forms
                     await DBManager.Instance().Insert(book.InsertQuery());
                 }
             }
-            //Login.LoggedUser?.Books.Clear();
         }
     }
 }
