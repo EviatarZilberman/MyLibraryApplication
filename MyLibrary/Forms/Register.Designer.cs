@@ -214,7 +214,6 @@
         private Label Password;
         private Label birthDateLabel;
         private TextBox UserNameBox;
-        private TextBox birthDateBox;
         private TextBox passwordBox;
         private TextBox confirmPasswordBox;
         private TextBox emailBox;

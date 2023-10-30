@@ -126,7 +126,7 @@ namespace MyLibraryApp.Models
                     {
                         while (reader.Read())
                         {
-                            Book book = null;
+                            Book? book = null;
                             try
                             { 
                                 book = new Book()
