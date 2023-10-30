@@ -50,10 +50,6 @@ namespace MyLibrary.Forms
                 this.Enabled = true;
                 userBooksList.Enabled = true;
                 this.Show();
-            }else if (login.DialogResult == DialogResult.None)
-            {
-              //  login.Close();
-                this.Close();
             }
             InitializeListView();
         }
