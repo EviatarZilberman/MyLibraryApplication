@@ -20,10 +20,10 @@ namespace MyLibrary.Forms
     {
         [AllowNull]
         public static User? LoggedUser { get; set; } = null;
-
+        
         public Login()
         {
-            InitializeComponent();
+                InitializeComponent();
         }
 
         private async void loginButton_Click(object sender, EventArgs e)
@@ -50,11 +50,6 @@ namespace MyLibrary.Forms
                 this.DialogResult = DialogResult.Abort;
                 MessageBox.Show("Username or password are invalid!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void registerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

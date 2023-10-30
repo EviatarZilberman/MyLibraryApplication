@@ -129,7 +129,6 @@
             Controls.Add(loginButton);
             Name = "Login";
             Text = "MyLibrary- Login";
-            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

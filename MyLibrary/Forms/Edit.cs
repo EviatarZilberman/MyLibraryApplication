@@ -37,17 +37,6 @@ namespace MyLibrary.Forms
             this.lentTo_textBox.PlaceholderText = book.SubItems[7].Text;
         }
 
-        private void InitEdit()
-        {
-            this.title_textBox = new TextBox();
-            this.author_textBox = new TextBox();
-            this.rank_textBox = new TextBox();
-            this.lentTo_textBox = new TextBox();
-            this.language_textBox = new TextBox();
-            this.type_textBox = new TextBox();
-            this.added_dateTimePicker = new DateTimePicker();
-        }
-
         private async void editBook_button_Click(object sender, EventArgs e)
         {
             bool changed = false;
@@ -92,7 +81,7 @@ namespace MyLibrary.Forms
             }
             if (changed)
             {
-                if (await DBManager.Instance().Update(@$"UPDATE public.books SET title ='{Book.SubItems[0].Text}', last_change ='{DateTime.Now}', author ='{Book.SubItems[1].Text}', language ='{Book.SubItems[3].Text}', type ='{Book.SubItems[2].Text}', add_to_my_library ='{DateTime.Now}', lent_to ='{Book.SubItems[7].Text}', rank ='{Book.SubItems[5].Text}' WHERE internal_id = '{Book.SubItems[9].Text}';") == CoreReturns.SUCCESS)
+                if (await DBManager.Instance().Update(@$"UPDATE public.books SET title ='{Book.SubItems[0].Text}', last_change ='{DateTime.Now}', author ='{Book.SubItems[1].Text}', language ='{Book.SubItems[3].Text}', type ='{Book.SubItems[2].Text}', add_to_my_library ='{Book.SubItems[6].Text}', lent_to ='{Book.SubItems[7].Text}', rank ='{Book.SubItems[5].Text}' WHERE internal_id = '{Book.SubItems[9].Text}';") == CoreReturns.SUCCESS)
                 {
                     MessageBox.Show("The Book Eddited Seccessfully!", "Seccessfully Book Edit", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     this.Close();

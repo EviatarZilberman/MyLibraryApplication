@@ -20,15 +20,26 @@ namespace MyLibrary.Forms
     public partial class MainScreen : Form
     {
         public Label MainTitleLabel { get; set; } = new Label();
-
-        public MainScreen()
+        private void CloseForm(Login login)
         {
+            if (login.InvokeRequired)
+            {
+                login.Invoke(new MethodInvoker(delegate { login.Close(); }));
+            }
+            else
+            {
+                login.Close();
+            }
+        }
+        public MainScreen()
+        { 
             InitializeComponent();
             ColumnsInit();
             this.Enabled = false;
             userBooksList.Enabled = false;
             Login login = new Login(); // Creates a new instance of login screen.
             login.ShowDialog(); // Shows the login instance above all screens.
+            
             if (login.DialogResult == DialogResult.OK)
             {
                 this.MainTitleLabel = new Label();
@@ -39,6 +50,10 @@ namespace MyLibrary.Forms
                 this.Enabled = true;
                 userBooksList.Enabled = true;
                 this.Show();
+            }else if (login.DialogResult == DialogResult.None)
+            {
+              //  login.Close();
+                this.Close();
             }
             InitializeListView();
         }
@@ -47,8 +62,6 @@ namespace MyLibrary.Forms
         {
             Delete delete = new Delete();
             delete.ShowDialog();
-            Login.LoggedUser?.Books.Clear();
-            userBooksList.Items.Clear();
             this.InitializeListView();
         }
 
@@ -65,11 +78,6 @@ namespace MyLibrary.Forms
 
                 this.InitializeListView();
             }
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-
         }
 
         public void ColumnsInit()
@@ -89,6 +97,7 @@ namespace MyLibrary.Forms
         private async void InitializeListView()
         {
             Login.LoggedUser?.Books.Clear();
+            userBooksList.Items.Clear();
             await User.SelectBooksFromTable(User.SELECT_BOOKS_PER_USER_QUERY);
             for (int i = 0; i < Login.LoggedUser?.Books.Count; i++)
             {
@@ -99,7 +108,7 @@ namespace MyLibrary.Forms
                 book.SubItems.Add(Login.LoggedUser.Books[i].Language);
                 book.SubItems.Add(Login.LoggedUser.Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
                 book.SubItems.Add(Login.LoggedUser.Books[i].Rank);
-                book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToString("dd/MM/yyyy"));
+                book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToShortDateString());
                 book.SubItems.Add(Login.LoggedUser.Books[i].LentTo);
                 book.SubItems.Add(Login.LoggedUser.Books[i].ForeignId);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Id);
@@ -120,7 +129,7 @@ namespace MyLibrary.Forms
             {
                 // Customize the hyperlink appearance
                 e.Graphics.DrawString(e.SubItem.Text, new Font("Arial", 10, FontStyle.Underline),
-                    new SolidBrush(Color.Blue), e.Bounds.Location);
+                    new SolidBrush(Color.GreenYellow), e.Bounds.Location);
 
                 // You can also change the cursor to a hand when hovering over the link
                 if (e.Bounds.Contains(userBooksList.PointToClient(Cursor.Position)))
@@ -144,6 +153,7 @@ namespace MyLibrary.Forms
         {
             Edit edit = new Edit(book);
             edit.ShowDialog();
+            InitializeListView();
             return CoreReturns.SUCCESS;
         }
 

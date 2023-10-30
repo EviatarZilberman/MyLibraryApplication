@@ -73,7 +73,6 @@
             EditButton.TabIndex = 4;
             EditButton.Text = "Edit";
             EditButton.UseVisualStyleBackColor = true;
-            EditButton.Click += EditButton_Click;
             // 
             // MainScreen
             // 
