@@ -124,10 +124,12 @@ namespace MyLibrary.Forms
 
         private async void addButton_Click(object sender, EventArgs e) // Functions well!
         {
-                    foreach (ListViewItem item in searchedBooksList.Items)
+            int count = 0, added = 0;
+            foreach (ListViewItem item in searchedBooksList.Items)
             {
                 if (item.Checked)
                 {
+                    count++;
                     Book book = new Book()
                     {
                         Title = item.SubItems[2].Text,
@@ -140,9 +142,14 @@ namespace MyLibrary.Forms
                         LentTo = "Nobody",
                         Rank = "Unknown"
                     };
-                    await DBManager.Instance().Insert(book.InsertQuery());
+                    if (await DBManager.Instance().Insert(book.InsertQuery()) == CoreReturns.SUCCESS)
+                    {
+                        added++;
+                    }
                 }
             }
+            MessageBox.Show($"{added} of {count} Book(s) Added Seccessfully!", "Seccessfully Book(s) Add!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

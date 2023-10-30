@@ -54,7 +54,7 @@ namespace MyLibrary.Forms
             InitializeListView();
         }
 
-        private async void DeleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             Delete delete = new Delete();
             delete.ShowDialog();
