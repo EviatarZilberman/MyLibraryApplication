@@ -22,8 +22,6 @@ namespace MyLibrary.Forms
             Book = book;
             this.InitializeComponent();
             this.DisplayValues(book);
-            //this.InitEdit();
-            //this.DisplayValues(book);
         }
 
         private void DisplayValues (ListViewItem book)
@@ -39,7 +37,7 @@ namespace MyLibrary.Forms
 
         private async void editBook_button_Click(object sender, EventArgs e)
         {
-            bool changed = false;
+            bool changed = false, converted = true;
             if (Book?.SubItems[0].Text != this.title_textBox.Text && !string.IsNullOrEmpty(this.title_textBox.Text))
             {
                 changed = true;
@@ -62,8 +60,14 @@ namespace MyLibrary.Forms
             }
             if (Book?.SubItems[5].Text != this.rank_textBox.Text && !string.IsNullOrEmpty(this.rank_textBox.Text))
             {
-                changed = true;
-                Book.SubItems[5].Text = this.rank_textBox.Text;
+                if (Colboinik.StringNumberBounds(this.rank_textBox.Text) == CoreReturns.SUCCESS)
+                {
+                    changed = true;
+                    Book.SubItems[5].Text = this.rank_textBox.Text;
+                }else
+                {
+                    converted = false;
+                }
             }
             if (Colboinik.ConvertStringToDate(Book?.SubItems[6].Text) != Colboinik.ConvertStringToDate(this.added_dateTimePicker.Text))
             {
@@ -79,7 +83,7 @@ namespace MyLibrary.Forms
             {
                 MessageBox.Show("No parameters are changed!", "Edit Book", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-            if (changed)
+            if (changed && converted)
             {
                 if (await DBManager.Instance().Update(@$"UPDATE public.books SET title ='{Book.SubItems[0].Text}', last_change ='{DateTime.Now}', author ='{Book.SubItems[1].Text}', language ='{Book.SubItems[3].Text}', type ='{Book.SubItems[2].Text}', add_to_my_library ='{Book.SubItems[6].Text}', lent_to ='{Book.SubItems[7].Text}', rank ='{Book.SubItems[5].Text}' WHERE internal_id = '{Book.SubItems[9].Text}';") == CoreReturns.SUCCESS)
                 {

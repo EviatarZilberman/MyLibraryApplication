@@ -23,7 +23,6 @@ namespace MyLibraryApp.Models
         public DateTime? AddedToMyLibrary { get; set; }
         public string? AddedToMyLibraryString { get; set; } = DEFAULT;
         public string? LentTo { get; set; } = "Not Lent";
-        [Range(0, 10)]
         public string? Rank { get; set; } = DEFAULT;
         public static readonly string DEFAULT = "Unknown";
 

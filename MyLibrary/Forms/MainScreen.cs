@@ -32,14 +32,14 @@ namespace MyLibrary.Forms
             }
         }
         public MainScreen()
-        { 
+        {
             InitializeComponent();
             ColumnsInit();
             this.Enabled = false;
             userBooksList.Enabled = false;
             Login login = new Login(); // Creates a new instance of login screen.
             login.ShowDialog(); // Shows the login instance above all screens.
-            
+
             if (login.DialogResult == DialogResult.OK)
             {
                 this.MainTitleLabel = new Label();
@@ -98,7 +98,7 @@ namespace MyLibrary.Forms
             for (int i = 0; i < Login.LoggedUser?.Books.Count; i++)
             {
                 ListViewItem book = new ListViewItem(Login.LoggedUser.Books[i].Title);
-                
+
                 book.SubItems.Add(Login.LoggedUser.Books[i].Author);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Type);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Language);
@@ -145,12 +145,11 @@ namespace MyLibrary.Forms
         }
 
 
-    public async Task<CoreReturns> Edit(ListViewItem book)
+        public void Edit(ListViewItem book)
         {
             Edit edit = new Edit(book);
             edit.ShowDialog();
             InitializeListView();
-            return CoreReturns.SUCCESS;
         }
 
         private void userBooksList_ItemActivate(object sender, EventArgs e)
@@ -161,6 +160,13 @@ namespace MyLibrary.Forms
             var action = selectedItem.Tag as Action;
             action?.Invoke();
             //}
+        }
+
+        private void addNew_button_Click(object sender, EventArgs e)
+        {
+            Add add = new Add();
+            add.ShowDialog();
+            this.InitializeListView();
         }
     }
 }

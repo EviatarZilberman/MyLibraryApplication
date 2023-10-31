@@ -31,7 +31,7 @@
             userBooksList = new ListView();
             SearchButton = new Button();
             DeleteButton = new Button();
-            EditButton = new Button();
+            addNew_button = new Button();
             SuspendLayout();
             // 
             // userBooksList
@@ -65,21 +65,22 @@
             DeleteButton.UseVisualStyleBackColor = true;
             DeleteButton.Click += DeleteButton_Click;
             // 
-            // EditButton
+            // addNew_button
             // 
-            EditButton.Location = new Point(361, 22);
-            EditButton.Name = "EditButton";
-            EditButton.Size = new Size(112, 34);
-            EditButton.TabIndex = 4;
-            EditButton.Text = "Edit";
-            EditButton.UseVisualStyleBackColor = true;
+            addNew_button.Location = new Point(360, 22);
+            addNew_button.Name = "addNew_button";
+            addNew_button.Size = new Size(112, 34);
+            addNew_button.TabIndex = 4;
+            addNew_button.Text = "Add New";
+            addNew_button.UseVisualStyleBackColor = true;
+            addNew_button.Click += addNew_button_Click;
             // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(EditButton);
+            Controls.Add(addNew_button);
             Controls.Add(DeleteButton);
             Controls.Add(SearchButton);
             Controls.Add(userBooksList);
@@ -92,6 +93,6 @@
         private ListView userBooksList;
         private Button SearchButton;
         private Button DeleteButton;
-        private Button EditButton;
+        private Button addNew_button;
     }
 }
