@@ -100,7 +100,7 @@ namespace MyLibrary.Forms
         {
             for (int i = 0; i < Books.Count; i++)
             {
-                if (Books[i].Author.Contains(authorBox.Text) && comboLanguageBox.Text.Contains(Books[i].Language))
+                if (Books[i].Author.Contains(authorBox.Text) && comboLanguageBox.Text.ToLower().Contains(Books[i].Language))
                 {
                     ListViewItem book = new ListViewItem("");
                     book.SubItems.Add($"{i + 1}");
