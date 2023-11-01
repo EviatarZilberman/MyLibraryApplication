@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
-using MyLibrary.Interfaces;
 using MyLibraryApp.Models;
 using PostgreSQLDBManager;
 using System;
@@ -20,17 +19,6 @@ namespace MyLibrary.Forms
     public partial class MainScreen : Form
     {
         public Label MainTitleLabel { get; set; } = new Label();
-        private void CloseForm(Login login)
-        {
-            if (login.InvokeRequired)
-            {
-                login.Invoke(new MethodInvoker(delegate { login.Close(); }));
-            }
-            else
-            {
-                login.Close();
-            }
-        }
         public MainScreen()
         {
             InitializeComponent();

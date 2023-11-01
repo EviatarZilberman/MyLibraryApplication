@@ -38,11 +38,6 @@ namespace MyLibraryApp.Models
             throw new NotImplementedException();
         }
 
-        public override string? CreateQuery()
-        {
-            throw new NotImplementedException();
-        }
-
         public override string? UpdateQuery(Base b)
         {
             throw new NotImplementedException();

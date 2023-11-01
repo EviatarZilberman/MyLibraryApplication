@@ -27,7 +27,6 @@ namespace MyLibraryApp.Models
         public abstract string? InsertQuery();
         public abstract string? UpdateQuery(Base b);
         public abstract string? DeleteQuery(string id);
-        public abstract string? CreateQuery();
         public abstract string? SelectQuery(string key);
 
     }

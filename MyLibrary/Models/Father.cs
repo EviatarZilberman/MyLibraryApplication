@@ -10,11 +10,6 @@ namespace MyLibraryApp.Models
     {
         public string? ForeignId { get; set; } = string.Empty;
 
-        public override string? CreateQuery()
-        {
-            throw new NotImplementedException();
-        }
-
         public override string? DeleteQuery(string id)
         {
             throw new NotImplementedException();

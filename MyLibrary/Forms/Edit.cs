@@ -1,5 +1,4 @@
-﻿using MyLibrary.Interfaces;
-using MyLibraryApp.Models;
+﻿using MyLibraryApp.Models;
 using PostgreSQLDBManager;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,5 @@
 ﻿using APIApp;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using MyLibrary.Interfaces;
-using MyLibraryApp.Enums;
 using MyLibraryApp.Models;
 using Newtonsoft.Json.Linq;
 using PostgreSQLDBManager;
@@ -21,12 +19,12 @@ using View = System.Windows.Forms.View;
 
 namespace MyLibrary.Forms
 {
-    public partial class Search : Form, MyITable
+    public partial class Search : Form
     {
         private static List<Book> Books { get; set; } = new List<Book>();
         public Search()
         {
-            this.ReInit();
+            Books.Clear();
             this.InitializeComponent();
             this.ColumnsInit();
         }
@@ -73,14 +71,6 @@ namespace MyLibrary.Forms
                 });
             }
             InitializeListView();
-        }
-
-        public void ReInit() // Clears the Books variable.
-        {
-            if (Books.Count > 0)
-            {
-                Books.Clear();
-            }
         }
 
         public void ColumnsInit() // Function to declare the columns of a specific table.

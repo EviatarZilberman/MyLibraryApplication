@@ -1,5 +1,4 @@
 ﻿using MyLibrary.Forms;
-using MyLibraryApp.Enums;
 using Npgsql;
 using PostgreSQLDBManager;
 using System.Data;
@@ -43,11 +42,6 @@ namespace MyLibraryApp.Models
             this.CreationDate = creationDate;
             this.LastChange = lastChange;
             this.Id = internalId;
-        }
-
-        public override string? CreateQuery()
-        {
-            throw new NotImplementedException();
         }
 
         public override string? DeleteQuery(string id)

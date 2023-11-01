@@ -37,7 +37,6 @@ namespace MyLibrary.Forms
             deleteListView.Columns.Add("Added The Library", 100);
             deleteListView.Columns.Add("Lent To", 100);
         }
-
         private async void InitializeListView()
         {
             Login.LoggedUser?.Books.Clear();
@@ -105,5 +104,6 @@ namespace MyLibrary.Forms
                 MessageBox.Show($"{deleted} book(s) was deleted!", "Delete Books", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
     }
 }
