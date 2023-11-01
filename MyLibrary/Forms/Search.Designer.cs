@@ -137,7 +137,6 @@
             comboLanguageBox.Size = new Size(299, 33);
             comboLanguageBox.TabIndex = 3;
             comboLanguageBox.Text = "Hebrew";
-            comboLanguageBox.SelectedIndexChanged += comboLanguageBox_SelectedIndexChanged;
             // 
             // searchedBooksList
             // 

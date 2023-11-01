@@ -31,11 +31,6 @@ namespace MyLibrary.Forms
             this.ColumnsInit();
         }
 
-        private void comboLanguageBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private async void searchButton_Click(object sender, EventArgs e) // Searchs books by the book name.
         {
             if (string.IsNullOrEmpty(bookNameBox.Text) || string.IsNullOrWhiteSpace(bookNameBox.Text))
@@ -105,15 +100,18 @@ namespace MyLibrary.Forms
         {
             for (int i = 0; i < Books.Count; i++)
             {
-                ListViewItem book = new ListViewItem("");
-                book.SubItems.Add($"{i + 1}");
-                book.SubItems.Add(Books[i].Title);
-                book.SubItems.Add(Books[i].Author);
-                book.SubItems.Add(Books[i].Type);
-                book.SubItems.Add(Books[i].Language);
-                book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
+                if (Books[i].Author.Contains(authorBox.Text) && comboLanguageBox.Text.Contains(Books[i].Language))
+                {
+                    ListViewItem book = new ListViewItem("");
+                    book.SubItems.Add($"{i + 1}");
+                    book.SubItems.Add(Books[i].Title);
+                    book.SubItems.Add(Books[i].Author);
+                    book.SubItems.Add(Books[i].Type);
+                    book.SubItems.Add(Books[i].Language);
+                    book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
 
-                searchedBooksList.Items.Add(book);
+                    searchedBooksList.Items.Add(book);
+                }
             }
             this.Controls.Add(searchedBooksList);
         }
