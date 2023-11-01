@@ -47,7 +47,6 @@ namespace MyLibrary.Forms
                 }
                 else
                 {
-                    //this.DialogResult = DialogResult.Abort;
                     MessageBox.Show("Username or password are invalid!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             
