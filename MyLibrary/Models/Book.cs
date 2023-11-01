@@ -19,7 +19,7 @@ namespace MyLibraryApp.Models
         public string? Language { get; set; } = DEFAULT;
         public string? Type { get; set; } = DEFAULT;
         public DateTime? PublishDate { get; set; } = DateTime.MinValue;
-        public string? PublishDateString { get; set; } = DEFAULT;
+        public string PublishDateString { get; set; } = DEFAULT;
         public DateTime? AddedToMyLibrary { get; set; } = DateTime.MinValue;
         public string? AddedToMyLibraryString { get; set; } = DEFAULT;
         public string? LentTo { get; set; } = "Not Lent";

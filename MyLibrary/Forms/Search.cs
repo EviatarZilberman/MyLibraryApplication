@@ -68,7 +68,7 @@ namespace MyLibrary.Forms
                         }
                     }
                 }
-                Books.Add(new Book()
+                Books?.Add(new Book()
                 {
                     Title = results[0],
                     Author = results[1],

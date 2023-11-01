@@ -69,7 +69,7 @@ namespace MyLibrary.Forms
                     converted = false;
                 }
             }
-            if (Colboinik.ConvertStringToDate(Book?.SubItems[6].Text) != Colboinik.ConvertStringToDate(this.added_dateTimePicker.Text))
+            if (Colboinik.ConvertStringToDate(Book.SubItems[6].Text) != Colboinik.ConvertStringToDate(this.added_dateTimePicker.Text))
             {
                 changed = true;
                 Book.SubItems[6].Text = this.added_dateTimePicker.Text;
