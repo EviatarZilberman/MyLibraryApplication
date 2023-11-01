@@ -97,19 +97,39 @@ namespace MyLibrary.Forms
             await User.SelectBooksFromTable(User.SELECT_BOOKS_PER_USER_QUERY);
             for (int i = 0; i < Login.LoggedUser?.Books.Count; i++)
             {
-                ListViewItem book = new ListViewItem(Login.LoggedUser.Books[i].Title);
-
+                ListViewItem? book = new ListViewItem(Login.LoggedUser.Books[i].Title);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Author);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Type);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Language);
-                book.SubItems.Add(Login.LoggedUser.Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
-                book.SubItems.Add(Login.LoggedUser.Books[i].Rank);
-                book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToShortDateString());
+                if (Login.LoggedUser.Books[i].PublishDate != DateTime.MinValue && Login.LoggedUser.Books[i].AddedToMyLibrary != DateTime.MinValue)
+                {
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
+                    book.SubItems.Add(Login.LoggedUser.Books[i].Rank);
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToShortDateString());
+                }
+                else if (Login.LoggedUser.Books[i].PublishDate == DateTime.MinValue && Login.LoggedUser.Books[i].AddedToMyLibrary != DateTime.MinValue)
+                {
+                    book.SubItems.Add(Login.LoggedUser.Books[i].PublishDateString);
+                    book.SubItems.Add(Login.LoggedUser.Books[i].Rank);
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToShortDateString());
+                }
+                else if (Login.LoggedUser.Books[i].PublishDate != DateTime.MinValue && Login.LoggedUser.Books[i].AddedToMyLibrary == DateTime.MinValue)
+                {
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
+                    book.SubItems.Add(Login.LoggedUser.Books[i].Rank);
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibrary.Value.ToShortDateString());
+                }
+                else
+                {
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.PublishDateString);
+                    book.SubItems.Add(Login.LoggedUser.Books[i].Rank);
+                    book.SubItems.Add(Login.LoggedUser.Books[i]?.AddedToMyLibraryString);
+
+                }
                 book.SubItems.Add(Login.LoggedUser.Books[i].LentTo);
                 book.SubItems.Add(Login.LoggedUser.Books[i].ForeignId);
                 book.SubItems.Add(Login.LoggedUser.Books[i].Id);
                 book.Tag = (Action)(() => this.Edit(book));
-
                 userBooksList.Items.Add(book);
             }
             userBooksList.DrawSubItem += userBooksList_DrawSubItem;
@@ -143,7 +163,6 @@ namespace MyLibrary.Forms
                     new SolidBrush(Color.Blue), e.Bounds.Location);
             }
         }
-
 
         public void Edit(ListViewItem book)
         {

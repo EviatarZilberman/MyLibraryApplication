@@ -18,25 +18,14 @@ namespace MyLibraryApp.Models
         public string? Author { get; set; } = DEFAULT;
         public string? Language { get; set; } = DEFAULT;
         public string? Type { get; set; } = DEFAULT;
-        public DateTime? PublishDate { get; set; }
+        public DateTime? PublishDate { get; set; } = DateTime.MinValue;
         public string? PublishDateString { get; set; } = DEFAULT;
-        public DateTime? AddedToMyLibrary { get; set; }
+        public DateTime? AddedToMyLibrary { get; set; } = DateTime.MinValue;
         public string? AddedToMyLibraryString { get; set; } = DEFAULT;
         public string? LentTo { get; set; } = "Not Lent";
         public string? Rank { get; set; } = DEFAULT;
         public static readonly string DEFAULT = "Unknown";
 
-        public Book(Book b)
-        {
-            this.Title = b.Title;
-            this.Author = b.Author;
-            this.Language = b.Language;
-            this.Type = b.Type;
-            this.PublishDate = b.PublishDate;
-            this.AddedToMyLibrary = b.AddedToMyLibrary;
-            this.LentTo = b.LentTo;
-            this.Rank = b.Rank;
-        }
         public Book() { }
         public Book(string title, string? author = null,
             string? language = "Hebrew", string? type = null,
@@ -107,13 +96,8 @@ namespace MyLibraryApp.Models
 
         public override string? InsertQuery()
         {
-            return $@"Insert into public.books(creation_date, internal_id, title, author, language, type, publish_date, add_to_my_library, lent_to, rank, foreign_id) values('{this.CreationDate}', '{this.Id}', '{this.Title}', '{this.Author}', '{this.Language}', '{this.Type}', '{this.PublishDate}', '{this.AddedToMyLibrary}', '{this.LentTo}', '{this.Rank}', '{this.ForeignId}')";
-        }
-
-        public string? InsertQuery(User u)
-        {
-            if (u == null) return null;
-            return $@"Insert into public.users(creation_date, internal_id, title, author, language, type, publish_date, add_to_my_library, lent_to, rank, foreign_id) values('{this.CreationDate}', '{this.Id}', '{this.Title}', '{this.Author}', '{this.Language}', '{this.Type}', '{this.PublishDate}', '{this.AddedToMyLibrary}', '{this.LentTo}', '{this.Rank}', '{u.Id}')";
+            return $@"Insert into public.books(creation_date, internal_id, title, author, language, type, publish_date, add_to_my_library, lent_to, rank, foreign_id, publish_date_string, add_to_my_library_string)
+            values( '{this.CreationDate}', '{this.Id}', '{this.Title}', '{this.Author}', '{this.Language}', '{this.Type}', '{this.PublishDate}', '{this.AddedToMyLibrary}', '{this.LentTo}', '{this.Rank}', '{this.ForeignId}', '{this.PublishDateString}', '{this.AddedToMyLibraryString}')";
         }
 
         public override string? DeleteQuery(string id)

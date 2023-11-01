@@ -43,7 +43,8 @@ namespace MyLibrary.Forms
                 MessageBox.Show("Name is invalid!");
                 return;
             }
-
+            Search.Books?.Clear();
+            searchedBooksList.Items.Clear();
             await APIAccessor.Instance().Get(bookNameBox.Text);
 
             string[] keys = new string[5] { "title", "creator", "language", "date", "subject" };
