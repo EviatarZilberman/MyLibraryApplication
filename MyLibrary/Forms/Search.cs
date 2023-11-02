@@ -11,10 +11,13 @@ using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using View = System.Windows.Forms.View;
 
 namespace MyLibrary.Forms
@@ -90,25 +93,49 @@ namespace MyLibrary.Forms
         {
             for (int i = 0; i < Books.Count; i++)
             {
-                if (Books[i].Author.Contains(authorBox.Text) && comboLanguageBox.Text.ToLower().Contains(Books[i].Language))
+                try
                 {
-                    ListViewItem book = new ListViewItem("");
-                    book.SubItems.Add($"{i + 1}");
-                    book.SubItems.Add(Books[i].Title);
-                    book.SubItems.Add(Books[i].Author);
-                    book.SubItems.Add(Books[i].Type);
-                    book.SubItems.Add(Books[i].Language);
-                    book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
+                    string? year = Search.DateValidation(publish_textBox.Text);
+                    if (Books[i].Author.Contains(authorBox.Text) &&
+                        (comboLanguageBox.Text.ToLower().Contains(Books[i].Language) || string.IsNullOrEmpty(Books[i].Language))
+                          && (Books[i].PublishDate.Value.Year.ToString().Equals(year)
+                          ||
+                          string.IsNullOrWhiteSpace(year) ||
+                          string.IsNullOrEmpty(year))
+                        )
+                    {
+                        ListViewItem book = new ListViewItem("");
+                        book.SubItems.Add($"{searchedBooksList.Items.Count + 1}");
+                        book.SubItems.Add(Books[i].Title);
+                        book.SubItems.Add(Books[i].Author);
+                        book.SubItems.Add(Books[i].Type);
+                        book.SubItems.Add(Books[i].Language);
+                        book.SubItems.Add(Books[i]?.PublishDate.Value.ToString("dd/MM/yyyy"));
 
-                    searchedBooksList.Items.Add(book);
+                        searchedBooksList.Items.Add(book);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Instance().WriteLog(System.Reflection.MethodBase.GetCurrentMethod().Name, $"Error in initial books list in Search screen! Error: {ex.Message}");
+
                 }
             }
             this.Controls.Add(searchedBooksList);
         }
 
-        private void searchedBooksList_SelectedIndexChanged(object sender, EventArgs e)
+        private static string DateValidation(string year)
         {
-
+            if (string.IsNullOrEmpty(year) || string.IsNullOrWhiteSpace(year)) return "";
+            if (year.Length > 4) return "";
+            for (int i = 0; i < year.Length; i++)
+            {
+                if (year[i] > '9' || year[i] < '0')
+                {
+                    return "";
+                }
+            }
+            return year;
         }
 
         private async void addButton_Click(object sender, EventArgs e) // Functions well!
@@ -138,7 +165,14 @@ namespace MyLibrary.Forms
                 }
             }
             MessageBox.Show($"{added} of {count} Book(s) Added Seccessfully!", "Seccessfully Book(s) Add!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
+        private void clear_button_Click(object sender, EventArgs e)
+        {
+            bookNameBox.Text = string.Empty;
+            authorBox.Text = string.Empty;
+            publish_textBox.Text = string.Empty;
+            comboLanguageBox.SelectedIndex = 0;
         }
     }
 }

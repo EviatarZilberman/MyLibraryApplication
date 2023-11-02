@@ -23,7 +23,7 @@ namespace MyLibrary.Forms
             this.DisplayValues(book);
         }
 
-        private void DisplayValues (ListViewItem book)
+        private void DisplayValues(ListViewItem book)
         {
             this.title_textBox.PlaceholderText = book.SubItems[0].Text;
             this.author_textBox.PlaceholderText = book.SubItems[1].Text;
@@ -63,7 +63,8 @@ namespace MyLibrary.Forms
                 {
                     changed = true;
                     Book.SubItems[5].Text = this.rank_textBox.Text;
-                }else
+                }
+                else
                 {
                     converted = false;
                 }
@@ -88,7 +89,8 @@ namespace MyLibrary.Forms
                 {
                     MessageBox.Show("The Book Eddited Seccessfully!", "Seccessfully Book Edit", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     this.Close();
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Failure in book editting!", "Faild in Book Edit", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }

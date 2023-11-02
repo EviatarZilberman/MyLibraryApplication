@@ -20,36 +20,36 @@ namespace MyLibrary.Forms
     {
         [AllowNull]
         public static User? LoggedUser { get; set; } = null;
-        
+
         public Login()
         {
-                InitializeComponent();
+            InitializeComponent();
         }
 
         private async void loginButton_Click(object sender, EventArgs e)
         {
-        
-                if ((!string.IsNullOrEmpty(usernameBox.Text) ||
-                    !string.IsNullOrWhiteSpace(usernameBox.Text)) &&
-                    (!string.IsNullOrEmpty(passwordBox.Text) ||
-                    !string.IsNullOrWhiteSpace(passwordBox.Text)))
+
+            if ((!string.IsNullOrEmpty(usernameBox.Text) ||
+                !string.IsNullOrWhiteSpace(usernameBox.Text)) &&
+                (!string.IsNullOrEmpty(passwordBox.Text) ||
+                !string.IsNullOrWhiteSpace(passwordBox.Text)))
+            {
+                CoreReturns result = await User.SelectUserFromTable($"SELECT internal_id, creation_date, last_change, first_name, last_name, email, password, birth_date, username FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}'");
+                if (result == CoreReturns.SUCCESS)
                 {
-                    CoreReturns result = await User.SelectUserFromTable($"SELECT internal_id, creation_date, last_change, first_name, last_name, email, password, birth_date, username FROM public.users WHERE username = '{usernameBox.Text}' AND password = '{passwordBox.Text}'");
-                    if (result == CoreReturns.SUCCESS)
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Try again!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Username or password are invalid!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Try again!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            
+            }
+            else
+            {
+                MessageBox.Show("Username or password are invalid!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void registerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

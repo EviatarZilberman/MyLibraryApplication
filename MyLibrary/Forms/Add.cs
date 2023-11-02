@@ -47,7 +47,8 @@ namespace MyLibrary.Forms
             if (unknownPublish_checkBox.Checked)
             {
                 book.PublishDateString = Book.DEFAULT;
-            } else
+            }
+            else
             {
                 book.PublishDate = publish_dateTimePicker.Value;
             }
@@ -75,7 +76,8 @@ namespace MyLibrary.Forms
             {
                 MessageBox.Show("Book Added Seccessfully!", "Seccessfully Book Add!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
-            } else
+            }
+            else
             {
                 MessageBox.Show("Book Add Failed!", "Failed To Add Book!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

@@ -33,71 +33,67 @@
             usernameBox = new TextBox();
             passwordBox = new TextBox();
             passwordLabel = new Label();
-            stayLoggedcheckBox = new CheckBox();
             registerLinkLabel = new LinkLabel();
             label1 = new Label();
             SuspendLayout();
             // 
             // loginButton
             // 
-            loginButton.Location = new Point(366, 301);
+            loginButton.BackColor = Color.LimeGreen;
+            loginButton.Location = new Point(476, 349);
+            loginButton.Margin = new Padding(4, 3, 4, 3);
             loginButton.Name = "loginButton";
-            loginButton.Size = new Size(112, 34);
+            loginButton.Size = new Size(146, 39);
             loginButton.TabIndex = 0;
             loginButton.Text = "Login!";
-            loginButton.UseVisualStyleBackColor = true;
+            loginButton.UseVisualStyleBackColor = false;
             loginButton.Click += loginButton_Click;
             // 
             // usernameLabel
             // 
             usernameLabel.AutoSize = true;
-            usernameLabel.Location = new Point(143, 104);
+            usernameLabel.Location = new Point(186, 121);
+            usernameLabel.Margin = new Padding(4, 0, 4, 0);
             usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(91, 25);
+            usernameLabel.Size = new Size(121, 29);
             usernameLabel.TabIndex = 1;
             usernameLabel.Text = "Username";
             // 
             // usernameBox
             // 
-            usernameBox.Location = new Point(247, 98);
+            usernameBox.Location = new Point(321, 114);
+            usernameBox.Margin = new Padding(4, 3, 4, 3);
             usernameBox.Name = "usernameBox";
-            usernameBox.Size = new Size(231, 31);
+            usernameBox.Size = new Size(299, 36);
             usernameBox.TabIndex = 2;
             usernameBox.Text = "balor12";
             // 
             // passwordBox
             // 
-            passwordBox.Location = new Point(247, 169);
+            passwordBox.Location = new Point(321, 196);
+            passwordBox.Margin = new Padding(4, 3, 4, 3);
             passwordBox.Name = "passwordBox";
-            passwordBox.Size = new Size(231, 31);
+            passwordBox.Size = new Size(299, 36);
             passwordBox.TabIndex = 4;
             passwordBox.Text = "popmart123";
             // 
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(143, 172);
+            passwordLabel.Location = new Point(186, 200);
+            passwordLabel.Margin = new Padding(4, 0, 4, 0);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(87, 25);
+            passwordLabel.Size = new Size(114, 29);
             passwordLabel.TabIndex = 3;
             passwordLabel.Text = "Password";
-            // 
-            // stayLoggedcheckBox
-            // 
-            stayLoggedcheckBox.AutoSize = true;
-            stayLoggedcheckBox.Location = new Point(247, 238);
-            stayLoggedcheckBox.Name = "stayLoggedcheckBox";
-            stayLoggedcheckBox.Size = new Size(164, 29);
-            stayLoggedcheckBox.TabIndex = 5;
-            stayLoggedcheckBox.Text = "Stay Logged in?";
-            stayLoggedcheckBox.UseVisualStyleBackColor = true;
             // 
             // registerLinkLabel
             // 
             registerLinkLabel.AutoSize = true;
-            registerLinkLabel.Location = new Point(377, 364);
+            registerLinkLabel.Location = new Point(490, 422);
+            registerLinkLabel.Margin = new Padding(4, 0, 4, 0);
             registerLinkLabel.Name = "registerLinkLabel";
-            registerLinkLabel.Size = new Size(80, 25);
+            registerLinkLabel.Size = new Size(108, 29);
             registerLinkLabel.TabIndex = 6;
             registerLinkLabel.TabStop = true;
             registerLinkLabel.Text = "Register!";
@@ -107,7 +103,8 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(298, 40);
+            label1.Location = new Point(387, 46);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(176, 43);
             label1.TabIndex = 7;
@@ -116,17 +113,20 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 29F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.LemonChiffon;
+            ClientSize = new Size(1040, 522);
             Controls.Add(label1);
             Controls.Add(registerLinkLabel);
-            Controls.Add(stayLoggedcheckBox);
             Controls.Add(passwordBox);
             Controls.Add(passwordLabel);
             Controls.Add(usernameBox);
             Controls.Add(usernameLabel);
             Controls.Add(loginButton);
+            Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ForeColor = SystemColors.ActiveCaptionText;
+            Margin = new Padding(4, 3, 4, 3);
             Name = "Login";
             Text = "MyLibrary- Login";
             ResumeLayout(false);
@@ -140,7 +140,6 @@
         private TextBox usernameBox;
         private TextBox passwordBox;
         private Label passwordLabel;
-        private CheckBox stayLoggedcheckBox;
         private LinkLabel registerLinkLabel;
         private Label label1;
     }

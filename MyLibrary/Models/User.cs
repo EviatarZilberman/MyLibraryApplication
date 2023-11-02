@@ -60,11 +60,6 @@ namespace MyLibraryApp.Models
             return $"SELECT username FROM public.users;";
         }
 
-        public override string? UpdateQuery(Base b)
-        {
-            return $@"UPDATE public.users SET first_name = '{this.FirstName}', last_name = '{this.LastName}', email = '{this.Email}', birth_date = '{this.BirthDate}', password = '{this.Password}' WHERE internal_id = '{this.Id}'";
-        }
-
         public static async Task<CoreReturns> SelectUserFromTable(string? query)
         {
             await DBManager.ConnectionString.CloseAsync();

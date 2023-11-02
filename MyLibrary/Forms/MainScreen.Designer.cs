@@ -37,9 +37,10 @@
             // userBooksList
             // 
             userBooksList.AccessibleName = "userBooks";
-            userBooksList.Location = new Point(29, 110);
+            userBooksList.Location = new Point(38, 128);
+            userBooksList.Margin = new Padding(4, 3, 4, 3);
             userBooksList.Name = "userBooksList";
-            userBooksList.Size = new Size(749, 329);
+            userBooksList.Size = new Size(972, 381);
             userBooksList.Sorting = SortOrder.Ascending;
             userBooksList.TabIndex = 1;
             userBooksList.UseCompatibleStateImageBehavior = false;
@@ -47,43 +48,52 @@
             // 
             // SearchButton
             // 
-            SearchButton.Location = new Point(653, 22);
+            SearchButton.BackColor = SystemColors.ActiveCaption;
+            SearchButton.Location = new Point(849, 26);
+            SearchButton.Margin = new Padding(4, 3, 4, 3);
             SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(112, 34);
+            SearchButton.Size = new Size(146, 39);
             SearchButton.TabIndex = 2;
             SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
             // DeleteButton
             // 
-            DeleteButton.Location = new Point(508, 22);
+            DeleteButton.BackColor = Color.Red;
+            DeleteButton.Location = new Point(660, 26);
+            DeleteButton.Margin = new Padding(4, 3, 4, 3);
             DeleteButton.Name = "DeleteButton";
-            DeleteButton.Size = new Size(112, 34);
+            DeleteButton.Size = new Size(146, 39);
             DeleteButton.TabIndex = 3;
             DeleteButton.Text = "Delete";
-            DeleteButton.UseVisualStyleBackColor = true;
+            DeleteButton.UseVisualStyleBackColor = false;
             DeleteButton.Click += DeleteButton_Click;
             // 
             // addNew_button
             // 
-            addNew_button.Location = new Point(360, 22);
+            addNew_button.BackColor = Color.LimeGreen;
+            addNew_button.Location = new Point(468, 26);
+            addNew_button.Margin = new Padding(4, 3, 4, 3);
             addNew_button.Name = "addNew_button";
-            addNew_button.Size = new Size(112, 34);
+            addNew_button.Size = new Size(146, 39);
             addNew_button.TabIndex = 4;
             addNew_button.Text = "Add New";
-            addNew_button.UseVisualStyleBackColor = true;
+            addNew_button.UseVisualStyleBackColor = false;
             addNew_button.Click += addNew_button_Click;
             // 
             // MainScreen
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 29F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.LemonChiffon;
+            ClientSize = new Size(1040, 522);
             Controls.Add(addNew_button);
             Controls.Add(DeleteButton);
             Controls.Add(SearchButton);
             Controls.Add(userBooksList);
+            Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "MainScreen";
             Text = "MyLibrary- Main";
             ResumeLayout(false);

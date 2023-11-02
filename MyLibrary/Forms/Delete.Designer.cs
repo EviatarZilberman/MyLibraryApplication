@@ -34,12 +34,15 @@
             // 
             // deleteInScreenButton
             // 
+            deleteInScreenButton.BackColor = Color.Red;
+            deleteInScreenButton.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            deleteInScreenButton.ForeColor = Color.Black;
             deleteInScreenButton.Location = new Point(339, 404);
             deleteInScreenButton.Name = "deleteInScreenButton";
             deleteInScreenButton.Size = new Size(112, 34);
             deleteInScreenButton.TabIndex = 0;
             deleteInScreenButton.Text = "Delete!";
-            deleteInScreenButton.UseVisualStyleBackColor = true;
+            deleteInScreenButton.UseVisualStyleBackColor = false;
             deleteInScreenButton.Click += deleteInScreenButton_Click;
             // 
             // deleteListView
@@ -55,6 +58,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LemonChiffon;
             ClientSize = new Size(800, 450);
             Controls.Add(deleteListView);
             Controls.Add(deleteInScreenButton);
