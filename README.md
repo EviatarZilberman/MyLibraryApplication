@@ -11,11 +11,9 @@ All providers come from the API of the National Library of Israel (which contain
 I have to say that it was challenging to write it and it took me some time to crack how to properly access the API and also of course how to save the data in the database. I deliberately chose a relational database to practice something a little more complex that requires planning and maintenance in advance. However, after the challenge, I am very satisfied with the result and the study.
 
 I hope you'll like it :)
-
+<br><br>
 <img width="520" alt="main" src="https://github.com/EviatarZilberman/MyLibraryApplication/assets/101967227/517db9e0-d18e-4840-9a7e-2808b958a384">
-
+<br><br>
 <img width="520" alt="search" src="https://github.com/EviatarZilberman/MyLibraryApplication/assets/101967227/880627fd-1b38-4ecb-8468-dbd3ec743074">
-
-
-
+<br><br>
 <img width="344" alt="new" src="https://github.com/EviatarZilberman/MyLibraryApplication/assets/101967227/a8592bd5-df81-42b3-a0c4-0b4f28e4e47b">
